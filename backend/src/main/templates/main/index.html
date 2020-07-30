@@ -1,0 +1,55 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Boot strap -->
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .content{
+            height: 75%;
+        }
+        .messageDiv{
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+        .custom-btn{
+            font-size: 10px;
+        }
+        .panel-footer{
+            height:10%;
+            color:gray;
+        }
+    </style>
+
+    <title>로그인 완료시 이동할 수 있는 창</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="page-header">
+                <h1>backtesting <small>with dw</small><a href="logout" class="btn btn-danger btn-xs" style="margin-left: 30px">로그아웃</a></h1>
+            </div>
+        </div>
+        <div class="content">
+            <div class="fileInputDiv">
+                <form action="backtesting/" method="POST">{% csrf_token %}
+                    <div class="input-group">
+                        검색할 지표를 적어주세요<br>
+                        <input id="indicator_search" name="indicator_search" type="EditText" class="form-control">
+                        <input type="submit" class="btn btn-success btn-lg" value="백테스팅 시작">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel-footer">
+            pj_송골매
+        </div>        
+    </div>
+</body>
+</html>
