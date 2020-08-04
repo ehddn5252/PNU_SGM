@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_test',
-    'backtesting',
-    'main',
+    
+]
+
+# 추가되는 앱들은 여기에. 
+INSTALLED_APPS += [
+    'app_users',
 ]
 
 MIDDLEWARE = [
@@ -81,10 +84,10 @@ DATABASES = {
     "default": {
         "ENGINE": "djongo",
         "CLIENT": {
-            "host": "mongodb+srv://user1:start3we@cluster0.mqlrz.mongodb.net/TEST1?retryWrites=true&w=majority",
-            "username": "user1",
-            "password": "start3we",
-            "name": "TEST1",
+            "host": "mongodb+srv://admin:admin@cluster0.ap2g0.mongodb.net/<dbname>?retryWrites=true&w=majority",
+            "username": "admin",
+            "password": "admin",
+            "name": "test-db-stock",
             "authMechanism": "SCRAM-SHA-1",
         },
     }
@@ -113,9 +116,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'ko-kr'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
