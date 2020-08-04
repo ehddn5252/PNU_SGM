@@ -4,6 +4,7 @@ import Head from 'next/head';
 // style
 import '../styles/utils.scss';
 import '../styles/dashboard.scss';
+import '../styles/index.scss';
 
 // components style
 import '../styles_components/filter.scss'
