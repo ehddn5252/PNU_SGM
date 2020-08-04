@@ -37,10 +37,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_test',
-    'backtesting',
-    'main',
+    
 ]
+
+# 추가되는 앱들은 여기에. 
+INSTALLED_APPS += [
+    'app_users',
+    'app_testreturn',
+    'app_board',
+    'rest_framework',
+    'corsheaders', # cors header 추가, > pip3 install django-cors-headers  
+]
+# rest_framework permission 추가
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -51,6 +65,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware'
+]
+
+# rest_framework 관련 middlewares 추가
+MIDDLEWARE += [
+    'corsheaders.middleware.CorsMiddleware',     
+    'django.middleware.common.CommonMiddleware', 
 ]
 
 ROOT_URLCONF = 'prj_sgm.urls'
@@ -81,10 +101,10 @@ DATABASES = {
     "default": {
         "ENGINE": "djongo",
         "CLIENT": {
-            "host": "mongodb+srv://user1:start3we@cluster0.mqlrz.mongodb.net/TEST1?retryWrites=true&w=majority",
-            "username": "user1",
-            "password": "start3we",
-            "name": "TEST1",
+            "host": "mongodb+srv://admin:admin@cluster0.ap2g0.mongodb.net/<dbname>?retryWrites=true&w=majority",
+            "username": "admin",
+            "password": "admin",
+            "name": "test-db-stock",
             "authMechanism": "SCRAM-SHA-1",
         },
     }
@@ -113,9 +133,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'ko-kr'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -128,3 +147,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# server단에서 cors-allow-all 
+CORS_ORIGIN_ALLOW_ALL = True
+
+# cors resource 특정 도메인 허용
+# CORS_ORIGIN_WHITELIST = [
+#     'http://127.0.0.1:3000',
+# ]
