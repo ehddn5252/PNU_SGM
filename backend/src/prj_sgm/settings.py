@@ -43,7 +43,18 @@ INSTALLED_APPS = [
 # 추가되는 앱들은 여기에. 
 INSTALLED_APPS += [
     'app_users',
+    'app_testreturn',
+    'app_board',
+    'rest_framework',
+    'corsheaders', # cors header 추가, > pip3 install django-cors-headers  
 ]
+# rest_framework permission 추가
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,6 +65,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware'
+]
+
+# rest_framework 관련 middlewares 추가
+MIDDLEWARE += [
+    'corsheaders.middleware.CorsMiddleware',     
+    'django.middleware.common.CommonMiddleware', 
 ]
 
 ROOT_URLCONF = 'prj_sgm.urls'
@@ -130,3 +147,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# server단에서 cors-allow-all 
+CORS_ORIGIN_ALLOW_ALL = True
+
+# cors resource 특정 도메인 허용
+# CORS_ORIGIN_WHITELIST = [
+#     'http://127.0.0.1:3000',
+# ]
