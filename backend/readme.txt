@@ -1,5 +1,7 @@
 < 개발환경 설정, 기록 정리 >
 
+window virtualenv -> .\env\Scripts\activate
+
 port kill command (맥 기준)
 > sudo lsof -t -i tcp:8000 | xargs kill -9
 

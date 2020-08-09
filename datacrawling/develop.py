@@ -30,8 +30,8 @@ break_value=0
 
 
 # 아이디와 비밀번호 지정
-USER = "eunhye1402"
-PASS = "1402"
+USER = "naver_64669538"
+PASS = "sgm_64669538"
 
 def data_refine(doc_content,soup,add,indicator_list,indicator_list_num,day_list):
     manu_value=""
