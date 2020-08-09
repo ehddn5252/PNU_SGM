@@ -5,6 +5,11 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 import datetime
 
+# Progress bar 추가
+import time
+from tqdm import tqdm
+from tqdm import trange
+
 # 자본잠식률은 제외했음 총 25개
 indicator_list=["EPS_connect","EPS_individual","PER","BPS","PBR","CFPS","PCR","SPS","PSR","DPS","Market_odds","ROE","ROS","S/A","A/E","ROA","Net_Profit_Margin","Sales_Operating_Margin","Sales_Growth_Rate","Operating_Profit_Growwth_Rate","Net_Profit_Growth_Rate","Equity_Capital_Growth_Rate","Debt_Ratio","Current_Ratio","Interest_Compensation_Magnification(Times)"]
 # 1. 영업활동현금흐름 2. 투자활동현금흐름 3. 재무활동현금흐름
@@ -89,7 +94,7 @@ def crawling(code,add,soup):
     soup=go_url(url_getinfo3)
     doc_content=data_refine(doc_content,soup,add,indicator_list3,indicator_list_num3,day_list)
     doc_content+=" }"+"\n"
-    print(doc_content)
+    # print(doc_content)
     f2.write(doc_content)
 
 if __name__=="__main__":
@@ -104,14 +109,16 @@ if __name__=="__main__":
     res = session.post(url_login, data=login_info)
     res.raise_for_status() # 오류가 발생하면 예외가 발생
     now = datetime.datetime.now()
-    print(now)
+    # print(now)
 
     f = open(inputfile, 'r')
     f2 = open(outputfile, 'w')
 
     lines = f.readlines()
-    for line in lines:
-        code=line[:-1]
+
+    # progress bar 추가
+    for index in range(len(lines)):
+        code=lines[index][:-1]
         url_getinfo1 = "http://www.itooza.com/vclub/y10_page.php?ss=10&sv=10&cmp_cd="+code
         soup=go_url(url_getinfo1)
 
