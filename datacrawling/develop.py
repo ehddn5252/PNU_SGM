@@ -117,7 +117,7 @@ if __name__=="__main__":
     lines = f.readlines()
 
     # progress bar 추가
-    for index in range(len(lines)):
+    for index in trange(len(lines)):
         code=lines[index][:-1]
         url_getinfo1 = "http://www.itooza.com/vclub/y10_page.php?ss=10&sv=10&cmp_cd="+code
         soup=go_url(url_getinfo1)
@@ -137,4 +137,4 @@ if __name__=="__main__":
     f.close()
     f2.close()
     now = datetime.datetime.now()
-    print(now)
+    #print(now)
