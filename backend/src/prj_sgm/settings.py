@@ -14,8 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
+               
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -25,7 +24,8 @@ SECRET_KEY = '()-+1_52o844$@b6vpdtz1d!q+c*0c9p8gl%wymh_rv2#9x)d4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ngrok 사용을 위해 모든 ip 허용
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,16 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
 ]
 
 # 추가되는 앱들은 여기에. 
 INSTALLED_APPS += [
-    'app_users',
-    'app_testreturn',
-    'app_board',
     'rest_framework',
     'corsheaders', # cors header 추가, > pip3 install django-cors-headers  
+    'apis',
 ]
 # rest_framework permission 추가
 REST_FRAMEWORK = {
@@ -101,7 +98,7 @@ DATABASES = {
     "default": {
         "ENGINE": "djongo",
         "CLIENT": {
-            "host": "mongodb+srv://admin:admin@cluster0.ap2g0.mongodb.net/<dbname>?retryWrites=true&w=majority",
+            "host": "mongodb+srv://admin:admin@cluster0.kjrlb.mongodb.net/test-db-stock?retryWrites=true&w=majority",
             "username": "admin",
             "password": "admin",
             "name": "test-db-stock",
@@ -110,6 +107,18 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "djongo",
+#         "CLIENT": {
+#             "host": "mongodb+srv://user1:start3we@cluster0.mqlrz.mongodb.net/pj_sgm?retryWrites=true&w=majority",
+#             "username": "user1",
+#             "password": "start3we",
+#             "name": "pj_sgm",
+#             "authMechanism": "SCRAM-SHA-1",
+#         },
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
