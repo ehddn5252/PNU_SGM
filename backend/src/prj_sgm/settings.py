@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    #'suit', # admin-page customizing
+    'apis.apps.SuitConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -98,10 +100,10 @@ DATABASES = {
     "default": {
         "ENGINE": "djongo",
         "CLIENT": {
-            "host": "mongodb+srv://admin:admin@cluster0.kjrlb.mongodb.net/test-db-stock?retryWrites=true&w=majority",
+            "host": "mongodb+srv://admin:admin@cluster0.kjrlb.mongodb.net/test_db_stock?retryWrites=true&w=majority",
             "username": "admin",
             "password": "admin",
-            "name": "test-db-stock",
+            "name": "test_db_stock",
             "authMechanism": "SCRAM-SHA-1",
         },
     }

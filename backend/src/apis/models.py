@@ -1,5 +1,5 @@
-from django.db import models
-
+from djongo import models
+import json
 
 class User(models.Model):
 
@@ -79,6 +79,9 @@ class Stretagy(models.Model):
     sell_price = models.IntegerField(verbose_name="손절가격")
     reval_trm = models.IntegerField(verbose_name="리벨런싱 주기 ( 0:분기별 | 1:연간 | 2:선택안함 )")
 
+    # 추가 데이터들 ( 전략들의 현재상태 )
+    stret_opened_inplat = models.BooleanField(verbose_name="플랫폼에 오픈하기", blank=True)
+
     def __str__(self):
         return self.stret_name
 
@@ -92,7 +95,7 @@ class Result(models.Model):
     
     objects = models.Manager()
     # 기본 항목
-    stretagy_result = models.ForeignKey('Stretagy', to_field="stret_num", on_delete=models.CASCADE, verbose_name="전략 고유번호당 결과")
+    stretagy_result = models.OneToOneField('Stretagy', to_field="stret_num", on_delete=models.CASCADE, verbose_name="전략 고유번호당 결과")
     writer_name = models.ForeignKey('User',to_field="username", on_delete=models.CASCADE, verbose_name="전략 작성자명")
 
     # 결과 항목
@@ -101,6 +104,15 @@ class Result(models.Model):
     cagr = models.IntegerField(verbose_name="누적수익률") 
     m_cagr = models.IntegerField(verbose_name="월간수익률")
 
+    # 선택된 종목들 리스트
+    selected_companys = models.CharField(max_length=1024, verbose_name="선택된 종목 리스트") 
+
+    def set_selected_companys(self, x):
+        self.selected_companys = json.dumps(x)
+
+    def get_selected_companys(self):
+        return json.loads(self.selected_companys)
+
     def __str__(self):
         return str(self.stretagy_result)
 
@@ -108,3 +120,7 @@ class Result(models.Model):
         db_table = "Results"
         verbose_name = "result"
         verbose_name_plural ="Results"
+
+
+
+
