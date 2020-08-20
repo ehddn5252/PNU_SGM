@@ -11,6 +11,7 @@ One to two paragraph statement about your product and what it does.
 
 ![intro page3-01](https://user-images.githubusercontent.com/37919421/90789133-7f84a400-e341-11ea-8ed5-eb9b56e4d85c.png)
 ![community main0820-01](https://user-images.githubusercontent.com/37919421/90789500-f5890b00-e341-11ea-867f-338e7f82565c.png)
+![my page0817-01](https://user-images.githubusercontent.com/37919421/90789593-0afe3500-e342-11ea-8d6f-da898ca1508a.png)
 
 ## Installation
 
