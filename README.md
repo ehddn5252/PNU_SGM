@@ -8,8 +8,6 @@
 
 One to two paragraph statement about your product and what it does.
 
-![screenshot_20171221-151714](https://files.slack.com/files-pri/T0166EZUME3-F018RCW9SG6/my_page0817-01.png)
-
 ## Installation
 
 OS X & Linux:
