@@ -22,7 +22,7 @@ urlpatterns = [
 	# result crud
 	path('result-list/', views.resultList, name="result-list"),
 	path('result-detail/<str:pk>/', views.resultDetail, name="result-detail"),
-	path('result-create/', views.resultCreate, name="result-create"),
+	path('result-create/', views.resultCreate,  name="result-create"),
 	path('result-update/<str:pk>/', views.resultUpdate, name="result-update"),
 	path('result-delete/<str:pk>/', views.resultDetail, name="result-delete"),
 ]

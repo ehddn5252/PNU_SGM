@@ -63,13 +63,13 @@ class Stretagy(models.Model):
 
     # 주가 가치평가 지표
     u_per_s = models.IntegerField(verbose_name="주가수익배수(min)", blank=True)
-    u_per_e = models.IntegerField(verbose_name="주가수익배수(min)", blank=True)
-    u_pbr_s = models.IntegerField(verbose_name="주가수익배수(min)", blank=True)
-    u_pbr_e = models.IntegerField(verbose_name="주가수익배수(min)", blank=True)
-    u_pcr_s = models.IntegerField(verbose_name="주가수익배수(min)", blank=True)
-    u_pcr_e = models.IntegerField(verbose_name="주가수익배수(min)", blank=True)
-    u_psr_s = models.IntegerField(verbose_name="주가수익배수(min)", blank=True)
-    u_psr_e = models.IntegerField(verbose_name="주가수익배수(min)", blank=True)
+    u_per_e = models.IntegerField(verbose_name="주가수익배수(max)", blank=True)
+    u_pbr_s = models.IntegerField(verbose_name="주가순자산배수(min)", blank=True)
+    u_pbr_e = models.IntegerField(verbose_name="주가순자산배수(max)", blank=True)
+    u_pcr_s = models.IntegerField(verbose_name="주가현금흐름배수(min)", blank=True)
+    u_pcr_e = models.IntegerField(verbose_name="주가현금흐름배수(max)", blank=True)
+    u_psr_s = models.IntegerField(verbose_name="주가매출액배수(min)", blank=True)
+    u_psr_e = models.IntegerField(verbose_name="주가매출액배수(max)", blank=True)
     u_marketDiviend_s = models.IntegerField(verbose_name="시가 배당률(min)", blank=True)
     u_marketDiviend_e = models.IntegerField(verbose_name="시가 배당률(max)", blank=True)
 

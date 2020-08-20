@@ -19,11 +19,11 @@ def apiOverview(request):
 		'User Update':'/user-update/<str:pk>/',
 		'User Delete':'/user-delete/<str:pk>/',
 		# strategy api 예시
-		'Strategy List':'/strategy-list/',
-		'Strategy Detail':'/strategy-detail/<str:pk>/',
-		'Strategy Create':'/strategy-create/',
-		'Strategy Update':'/strategy-update/<str:pk>/',
-		'Strategy Delete':'/strategy-delete/<str:pk>/',
+		'Strategy List':'/strat-list/',
+		'Strategy Detail':'/strat-detail/<str:pk>/',
+		'Strategy Create':'/strat-create/',
+		'Strategy Update':'/strat-update/<str:pk>/',
+		'Strategy Delete':'/strat-delete/<str:pk>/',
 		# Result api 예시
 		'Result List':'/result-list/',
 		'Result Detail':'/result-detail/<str:pk>/',
