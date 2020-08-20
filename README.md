@@ -6,6 +6,12 @@
 [![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url]
 
+![alt tag](https://raw.githubusercontent.com/Seungyeup/PNU_SGM/master/images/intro page3-01.png)
+
+![alt tag](https://raw.githubusercontent.com/Seungyeup/PNU_SGM/master/images/community main0820-01.png)
+
+![alt tag](https://raw.githubusercontent.com/Seungyeup/PNU_SGM/master/images/my page0817-01.png)
+
 One to two paragraph statement about your product and what it does.
 
 ## Installation
