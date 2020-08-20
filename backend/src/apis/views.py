@@ -96,7 +96,7 @@ def strategyDetail(request, pk):
 @api_view(['POST'])
 def strategyCreate(request):
 	serializer = stretagySerializer(data=request.data)
-
+	
 	if serializer.is_valid():
 		serializer.save()
 
