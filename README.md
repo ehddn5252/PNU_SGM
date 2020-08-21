@@ -29,6 +29,7 @@
 frontend - next.js npm url: http://afa5523565ae.ngrok.io
 
 backend - django-rest-framework ngrok url: http://fa3849b69ce8.ngrok.io/apis/
+
 backend - django-admin page url: http://fa3849b69ce8.ngrok.io/admin
 
 mongodb - atlas database: https://cloud.mongodb.com/v2/5f376e368a7cea3dc026163b#clusters
