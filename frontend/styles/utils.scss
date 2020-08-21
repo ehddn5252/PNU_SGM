@@ -1,4 +1,25 @@
 // 전체화면 설정
 body {
     margin: 0;
+    background-image: url(../static/img/backgroundImg.png);
+    background-repeat: no-repeat;
+    background-size:cover;
+    color: white;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+.parameter-section::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: gray;
+}
+.parameter-section::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
 }

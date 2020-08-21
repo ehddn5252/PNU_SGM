@@ -1,20 +1,36 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import { useDispatch, useSelector } from 'react-redux';
+// import {LOG_IN, LOG_OUT} from '../reducers/user';
+import {loginAction, logoutAction} from '../reducers/user';
+import LoginForm from '../components/LoginForm';
 
 const Home = () => {
+  const dispatch = useDispatch();
+  // const {isLoggedIn, user} = useSelector(state => state.user)
+  const user = useSelector(state => state.user.user)
+  const isLoggedIn = useSelector(state => state.user.isLoggedIn)
+  const {mainGroups} = useSelector(state => state.group)
+  console.log(isLoggedIn)
+  console.log(user)
+
   return (
     <div className="index">
       <nav>
         <span className="logo"><Link href="/"><a>Logo</a></Link></span>
         <span className="linkBtn-container">
           <li className="linkBtn"><Link href=""><a>linkBtn</a></Link></li>
-          <li className="linkBtn"><Link href="/community"><a>community</a></Link></li>
-          <li className="linkBtn"><Link href="/backtest"><a>dashboard</a></Link></li>
+          <li className="linkBtn"><Link href="/dashboard"><a>dashboard</a></Link></li>
+          <li className="linkBtn"><Link href=""><a>
+            {/* {dummy.isLoggedIn ? 'LOGOUT' : 'LOGIN' } */}
+            </a></Link></li>
+          {user ? <div>로그인했습니다. {user.nickname}</div> : <div>로그아웃 했습니다</div>}
         </span>
         
         <span className="profile"><Link href="/profile"><a>profile</a></Link></span>
       </nav>
+      <LoginForm/>
       <section className="main">
         {/* main */}
         <article>
