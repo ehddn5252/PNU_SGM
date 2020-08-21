@@ -7,6 +7,7 @@
 [![Downloads Stats][npm-downloads]][npm-url]
 
 backend - django-rest-framework url: http://3612182e1200.ngrok.io/apis/
+
 frontend url: 
 
 ## Introduction
