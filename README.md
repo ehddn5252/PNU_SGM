@@ -6,7 +6,8 @@
 [![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url]
 
-http://3612182e1200.ngrok.io/apis/
+backend - django-rest-framework url: http://3612182e1200.ngrok.io/apis/
+frontend url: 
 
 ## Introduction
 접근성이 높은 개방형 투자 플랫폼 '맥스턴'을 제작하여, 개인 투자자의 자기주도적 투자 전략 수립을 돕는 것이 목표입니다. 플랫폼 자체 커뮤니티의 활용으로 개인 투자자들의 투자 문화를 성숙화합니다. 빅데이터 분석 역량을 활용해 국민의 재산 증식에 기여하는 플랫폼으로 성장하겠습니다.
