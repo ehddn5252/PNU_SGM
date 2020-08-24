@@ -76,8 +76,8 @@
     .parameter-section {
         width: 40%;
         height: calc(96vh - 55px);
-        // background: yellow;
-        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
         
         .parameter-title{
             height: 4vh;
@@ -95,6 +95,10 @@
         }
         .filterContainer{
             color: white;
+            width: 98%;
+            height: calc(90vh - 55px);
+            // background: pink;
+            overflow-y: scroll;
         }
     }
 
