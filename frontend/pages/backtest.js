@@ -15,10 +15,10 @@ import { useInput } from "../components/LoginForm"
 import axios from "axios"
 
 const BackTest = () => {
-  const response = axios.get("api/hello").then(function (response) {
-    console.log(response)
-    console.log(response.data)
-  })
+  //   const response = axios.get("api/hello").then(function (response) {
+  //     console.log(response)
+  //     console.log(response.data)
+  //   })
   // console.log(response)
 
   // const group = useSelector(state => state.group);
