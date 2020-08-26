@@ -1,25 +1,32 @@
 // 전체화면 설정
 body {
-    margin: 0;
-    background-image: url(../static/img/backgroundImg.png);
-    background-repeat: no-repeat;
-    background-size:cover;
-    color: white;
-    overflow: hidden;
+  margin: 0;
+  background-image: url(../static/img/backgroundImg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
 }
 
+// scroll바
 ::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: transparent;
+  background-color: transparent;
 }
-.parameter-section::-webkit-scrollbar-thumb {
-    border-radius: 3px;
-    background-color: gray;
+.filterContainer::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: gray;
 }
-.parameter-section::-webkit-scrollbar-button {
-    width: 0;
-    height: 0;
+.filterContainer::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+
+//input 화살표없애기
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

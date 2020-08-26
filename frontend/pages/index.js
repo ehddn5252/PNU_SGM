@@ -18,19 +18,20 @@ const Home = () => {
   return (
     <div className="index">
       <nav>
-        <span className="logo"><Link href="/"><a>Logo</a></Link></span>
+        <span className="logo"><Link href="/"><a></a></Link></span>
         <span className="linkBtn-container">
-          <li className="linkBtn"><Link href=""><a>linkBtn</a></Link></li>
-          <li className="linkBtn"><Link href="/dashboard"><a>dashboard</a></Link></li>
-          <li className="linkBtn"><Link href=""><a>
-            {/* {dummy.isLoggedIn ? 'LOGOUT' : 'LOGIN' } */}
+          <li className="linkBtn"><Link href="/backtest"><a>BACKTEST</a></Link></li>
+          <li className="linkBtn"><Link href=""><a>LOGIN</a></Link></li>
+          <li className="linkBtn"><Link href=""><a>SIGNUP</a></Link></li>
+          {/* <li className="linkBtn"><Link href=""><a>
+            
             </a></Link></li>
-          {user ? <div>로그인했습니다. {user.nickname}</div> : <div>로그아웃 했습니다</div>}
+          {user ? <div>로그인했습니다. {user.nickname}</div> : <div>로그아웃 했습니다</div>} */}
         </span>
         
-        <span className="profile"><Link href="/profile"><a>profile</a></Link></span>
+        <span className="profile"><Link href="/profile"><a></a></Link></span>
       </nav>
-      <LoginForm/>
+      {/* <LoginForm/> */}
       <section className="main">
         {/* main */}
         <article>
