@@ -1,4 +1,5 @@
-# 사용하기 편하기 위해 만든 class 
+# 사용하기 편하기 위해 만든 class  
+# 객체 f
 class Init_data:
     def __init__(self):
         self.is_buy = []                                                # 구매했는지 구매 안했는지 확인하는 변수
@@ -7,8 +8,12 @@ class Init_data:
         self.rebalancing_date_list=[]                                   # 리벨런싱 지표에 따라 저장할 날짜 ex 2019_12 2019_09 형식으로 저장됨
         self.code_date_clasifyed_list=[]                                # 분류된 데이터
         self.code_date_clasifyed_list_init=[]
+        self.partition_invertment_principal = []
+        self.investment_principal=0
+
 
 # 유저 입력 데이터 
+# 객체 user_input
 # 주의점 : backtesting 가능한 date 데이터 범위 : 20110101~ 20200101
 class User_input_data:
     def __init_(self):
@@ -16,7 +21,7 @@ class User_input_data:
         self.INDICATOR_LIST=[]                                          # 지표 리스트
         self.INDICATOR_MIN_LIST = []                                    # 지표별 최솟값
         self.INDICATOR_MAX_LIST = []                                    # 지표별 최댓값
-        self.INVESTMENT_PRINCIPAL_COPY = self.investment_principal= 0   # 초기 자본
+        self.INVESTMENT_PRINCIPAL_COPY = 0   # 초기 자본
         self.DATE_START= 0                                              # 백테스팅 시작 날짜
         self.DATE_END= 0                                                # 백테스팅 종료 날짜
         self.THE_NUMBER_OF_MAXIMUM_EVENT= 2                             # 최대 선택 종목 수
@@ -53,20 +58,28 @@ class User_input_data:
 
 # 임의의 전략 1
     def strategy1(self):
-        self.INDICATOR_NUM=3
-        self.INDICATOR_LIST=["PER","PBR","ROE"]
-        self.INDICATOR_MIN_LIST = ['0','1','0']
-        self.INDICATOR_MAX_LIST = ["10","10","10"]
+        self.INDICATOR_NUM=4
+        self.INDICATOR_LIST=["PER","PBR","ROE","ROA"]
+        self.INDICATOR_MIN_LIST = ['1','0','20','5']
+        self.INDICATOR_MAX_LIST = ["10","10","100",'20']
         self.INVESTMENT_PRINCIPAL_COPY = self.investment_principal=1000000
-        self.DATE_START=20180101
-        self.DATE_END=20191129
-        self.THE_NUMBER_OF_MAXIMUM_EVENT=4
+        self.DATE_START=20130101
+        self.DATE_END=20150101
+        self.THE_NUMBER_OF_MAXIMUM_EVENT=3
         self.BUYING_CONDITION=0.9
-        self.sales_profit = self.BUYING_CONDITION* 1.2
-        self.sales_loss = self.BUYING_CONDITION * 0.9
-        self.REBALANCING = "0"
+        self.sales_profit = self.BUYING_CONDITION* 1.3
+        self.sales_loss = self.BUYING_CONDITION * 0.5
+        self.REBALANCING = "1"
+
+# 객체 trade
+class Stock_trading_indicator:
+    def __init__(self):
+        self.buing_price=0
+        self.sales_profit_price=0
+        self.sales_loss_price=0
 
 # 결과 class
+# 객체 r
 class Result:
    def __init__(self,writer_name):
         self.writer_name=""         #유저 이름
