@@ -29,8 +29,8 @@ class Strategy(models.Model):
         
     # Tab1 기본 항목
     investment = models.IntegerField(verbose_name="투자원금")
-    investment_Start = models.DateTimeField(verbose_name="투자 시작일")
-    investment_End = models.DateTimeField(verbose_name="투자 마감일")
+    investment_Start = models.IntegerField(verbose_name="투자 시작일")
+    investment_End = models.IntegerField(verbose_name="투자 마감일")
     maxStockNumber = models.IntegerField(verbose_name="최대 보유 종목수")
     userMarketCap = models.IntegerField(verbose_name="대상기업 최소시가총액")
 
