@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User,Stretagy,Result
+from .models import User,Strategy,Result
 
 class userSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -7,9 +7,9 @@ class userSerializer(serializers.ModelSerializer):
 		fields ='__all__'
 
 
-class stretagySerializer(serializers.ModelSerializer):
+class strategySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Stretagy
+        model = Strategy
         fields ='__all__'
 
 

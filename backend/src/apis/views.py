@@ -2,9 +2,9 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
-from .serializers import userSerializer,stretagySerializer,resultSerializer
+from .serializers import userSerializer,strategySerializer,resultSerializer
 
-from .models import User, Stretagy, Result
+from .models import User, Strategy, Result
 
 # ================= user crud ======================= 
 # ===================================================
@@ -81,21 +81,21 @@ def userDelete(request, pk):
 
 @api_view(['GET'])
 def strategyList(request):
-	strategys = Stretagy.objects.all().order_by('-id')
-	serializer = stretagySerializer(strategys, many=True)
+	strategys = Strategy.objects.all().order_by('-id')
+	serializer = strategySerializer(strategys, many=True)
 	return Response(serializer.data)
 
 
 @api_view(['GET'])
 def strategyDetail(request, pk):
-	strategys = Stretagy.objects.get(id=pk)
-	serializer = stretagySerializer(strategys, many=False)
+	strategys = Strategy.objects.get(id=pk)
+	serializer = strategySerializer(strategys, many=False)
 	return Response(serializer.data)
 
 
 @api_view(['POST'])
 def strategyCreate(request):
-	serializer = stretagySerializer(data=request.data)
+	serializer = strategySerializer(data=request.data)
 	
 	if serializer.is_valid():
 		serializer.save()
@@ -105,8 +105,8 @@ def strategyCreate(request):
 
 @api_view(['POST'])
 def strategyUpdate(request, pk):
-	strategys = Stretagy.objects.get(id=pk)
-	serializer = stretagySerializer(instance=task, data=request.data)
+	strategys = Strategy.objects.get(id=pk)
+	serializer = strategySerializer(instance=task, data=request.data)
 
 	if serializer.is_valid():
 		serializer.save()
@@ -116,7 +116,7 @@ def strategyUpdate(request, pk):
 
 @api_view(['DELETE'])
 def strategyDelete(request, pk):
-	strategys = Stretagy.objects.get(id=pk)
+	strategys = Strategy.objects.get(id=pk)
 	strategys.delete()
 
 	return Response('strategy succsesfully delete!')

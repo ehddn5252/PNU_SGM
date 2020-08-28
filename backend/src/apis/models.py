@@ -17,7 +17,7 @@ class User(models.Model):
         verbose_name_plural ="Users"
 
 
-class Stretagy(models.Model):
+class Strategy(models.Model):
 
     objects = models.Manager()
     # 기본 항목
@@ -87,16 +87,16 @@ class Stretagy(models.Model):
         return self.stret_name
 
     class Meta:
-        db_table = "Stretagy"
+        db_table = "Strategy"
         verbose_name = "Strategy"
-        verbose_name_plural ="Stretagy"
+        verbose_name_plural ="Strategy"
 
 
 class Result(models.Model):
     
     objects = models.Manager()
     # 기본 항목
-    stretagy_result = models.OneToOneField('Stretagy', to_field="stret_num", on_delete=models.CASCADE, verbose_name="전략 고유번호당 결과")
+    strategy_result = models.OneToOneField('Strategy', to_field="stret_num", on_delete=models.CASCADE, verbose_name="전략 고유번호당 결과")
     writer_name = models.ForeignKey('User',to_field="username", on_delete=models.CASCADE, verbose_name="전략 작성자명")
 
     # 결과 항목
