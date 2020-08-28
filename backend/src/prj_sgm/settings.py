@@ -100,10 +100,10 @@ DATABASES = {
     "default": {
         "ENGINE": "djongo",
         "CLIENT": {
-            "host": "mongodb+srv://admin:admin@cluster0.kjrlb.mongodb.net/test_db_stock?retryWrites=true&w=majority",
+            "host": "mongodb+srv://admin:admin@cluster0.kjrlb.mongodb.net/pnu_sgm_platformdata?retryWrites=true&w=majority",
             "username": "admin",
             "password": "admin",
-            "name": "test_db_stock",
+            "name": "pnu_sgm_platformdata",
             "authMechanism": "SCRAM-SHA-1",
         },
     }

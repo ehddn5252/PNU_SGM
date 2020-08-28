@@ -96,7 +96,7 @@ class Result(models.Model):
     
     objects = models.Manager()
     # 기본 항목
-    strategy_result = models.OneToOneField('Strategy', to_field="stret_num", on_delete=models.CASCADE, verbose_name="전략 고유번호당 결과")
+    strategy_result = models.OneToOneField('Strategy', to_field="strategyNumber", on_delete=models.CASCADE, verbose_name="전략 고유번호당 결과")
     writer_name = models.ForeignKey('User',to_field="username", on_delete=models.CASCADE, verbose_name="전략 작성자명")
 
     # 결과 항목
@@ -120,7 +120,7 @@ class Result(models.Model):
         return json.loads(self.selected_companys)
 
     def __str__(self):
-        return str(self.stretagy_result)
+        return str(self.strategy_result)
 
     class Meta:
         db_table = "Results"
