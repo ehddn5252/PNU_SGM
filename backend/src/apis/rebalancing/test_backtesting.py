@@ -2,7 +2,7 @@
 import pymongo
 import json
 
-from test_backtesting_class_collection import Init_data, User_input_data, Stock_trading_indicator, Result
+#from test_backtesting_class_collection import Init_data, User_input_data, Stock_trading_indicator, Result
 
 # 규칙
 # 1. 맨 처음 받고 변하지 않는 변수는 모두 대문자로
@@ -106,7 +106,7 @@ def search_rebalanced_enterprise(db,f,user_input,j):
     json_find_dic=json.loads(mk_find_dic)
     #print(json_find_dic)
 
-    for doc in db.stockparam.find(json_find_dic,{"_id":False,"code":True}).sort([("Market_cap",-1)]).limit(20):
+    for doc in db.stock_parameters.find(json_find_dic,{"_id":False,"code":True}).sort([("Market_cap",-1)]).limit(20):
         f.enterprise_list.append(doc["code"])
 
     for i,indicator in enumerate(user_input.INDICATOR_LIST):
@@ -132,7 +132,7 @@ def make_code_date_clasifyed_list(db,f,user_input):
         for i in range(len(f.rebalancing_date_list)+10):      # 이건 문제가 아님
             f.code_date_clasifyed_list_init[k].append([])
         times=0
-        for i in db.price_info.find({"code":code1}):
+        for i in db.stock_priceInfo.find({"code":code1}):
             for j in i['data']:
                 if j['Date']>=user_input.DATE_START and j['Date']<=user_input.DATE_END:
                     #분기별 리벨런싱
@@ -301,13 +301,13 @@ def set_result(f,user_input,r):
     r.cagr= int(r.profit_all/user_input.INVESTMENT_PRINCIPAL_COPY * 100)
 
 # function10 :    
-def backtesting():
+def backtesting(initData,userInputData,stockTradingIndicator,result):
     # 초기 CLASS 세팅
-    f = Init_data()
-    user_input= User_input_data()
+    f = initData
+    user_input=userInputData
     user_input.strategy1()
-    trade = Stock_trading_indicator()
-    r = Result("dongwoo")
+    trade = stockTradingIndicator
+    r = result
     
     '''
     user_input.set_indicator_data()
@@ -316,8 +316,8 @@ def backtesting():
     '''
     count=0                          # 리벨런싱 횟수 정해주는 변수
     f.investment_principal = user_input.INVESTMENT_PRINCIPAL_COPY
-    client = pymongo.MongoClient("mongodb+srv://admin:admin@cluster0.kjrlb.mongodb.net/<test_db_stock>?retryWrites=true&w=majority")    # 파이몽고 사용해서
-    db = client.test_db_stock
+    client = pymongo.MongoClient("mongodb+srv://admin:admin@cluster0.kjrlb.mongodb.net/<pnu_sgm_stockdata>?retryWrites=true&w=majority")    # 파이몽고 사용해서
+    db = client.pnu_sgm_stockdata
     # init setting
     rebalancing_date_data(f,user_input)
     init_list_condiiton(f,user_input)
@@ -366,5 +366,6 @@ def backtesting():
     print("cagr         : " + str(r.cagr)+" %")
     print("currentAsset : " +str(r.currentAsset))
 
-if __name__ == "__main__":
-    backtesting()
+
+def testfunc():
+    print("hi")

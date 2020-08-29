@@ -88,3 +88,5 @@ class Result:
         self.currentAsset =0        # 현재 자산
         self.cagr = 0               # 누적 수익률
         self.quarter_cagr =[]       # 분기별 수익률
+
+ 
