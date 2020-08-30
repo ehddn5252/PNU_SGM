@@ -27,32 +27,62 @@ const MyPage = () => {
               <li>
                 <div className="mypage_stategyList_strategyName">strategy1</div>
                 <div className="mypage_stategyList_strategyPercentage">NN%</div>
-                <div className="mypage_stategyList_toggleButton">토글</div>
+                <div className="mypage_stategyList_toggleButton">
+                  <label class="switch">
+                    <input type="checkbox" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
               </li>
               <li>
                 <div className="mypage_stategyList_strategyName">strategy1</div>
                 <div className="mypage_stategyList_strategyPercentage">NN%</div>
-                <div className="mypage_stategyList_toggleButton">토글</div>
+                <div className="mypage_stategyList_toggleButton">
+                  <label class="switch">
+                    <input type="checkbox" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
               </li>
               <li>
                 <div className="mypage_stategyList_strategyName">strategy1</div>
                 <div className="mypage_stategyList_strategyPercentage">NN%</div>
-                <div className="mypage_stategyList_toggleButton">토글</div>
+                <div className="mypage_stategyList_toggleButton">
+                  <label class="switch">
+                    <input type="checkbox" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
               </li>
               <li>
                 <div className="mypage_stategyList_strategyName">strategy1</div>
                 <div className="mypage_stategyList_strategyPercentage">NN%</div>
-                <div className="mypage_stategyList_toggleButton">토글</div>
+                <div className="mypage_stategyList_toggleButton">
+                  <label class="switch">
+                    <input type="checkbox" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
               </li>
               <li>
                 <div className="mypage_stategyList_strategyName">strategy1</div>
                 <div className="mypage_stategyList_strategyPercentage">NN%</div>
-                <div className="mypage_stategyList_toggleButton">토글</div>
+                <div className="mypage_stategyList_toggleButton">
+                  <label class="switch">
+                    <input type="checkbox" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
               </li>
               <li>
                 <div className="mypage_stategyList_strategyName">strategy1</div>
                 <div className="mypage_stategyList_strategyPercentage">NN%</div>
-                <div className="mypage_stategyList_toggleButton">토글</div>
+                <div className="mypage_stategyList_toggleButton">
+                  <label class="switch">
+                    <input type="checkbox" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
               </li>
             </ol>
           </section>

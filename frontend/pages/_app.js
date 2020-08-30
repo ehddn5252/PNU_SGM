@@ -14,6 +14,7 @@ import "../styles/backtest/filterform.scss"
 
 // mypage style
 import "../styles/mypage/mypage.scss"
+import "../styles/mypage/mypage_strategyList.scss"
 
 // layout style
 import "../styles/layout/dashboardLayout.scss"
