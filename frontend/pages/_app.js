@@ -12,6 +12,9 @@ import "../styles/backtest/backtest.scss"
 import "../styles/backtest/filter.scss"
 import "../styles/backtest/filterform.scss"
 
+// mypage style
+import "../styles/mypage/mypage.scss"
+
 // layout style
 import "../styles/layout/dashboardLayout.scss"
 
