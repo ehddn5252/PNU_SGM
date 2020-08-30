@@ -24,13 +24,36 @@ const MyPage = () => {
               있습니다.
             </div>
             <ol>
-              <li>strategy1</li>
-              <li>strategy2</li>
-              <li>strategy3</li>
-              <li>strategy4</li>
-              <li>strategy5</li>
-              <li>strategy6</li>
-              <li>strategy7</li>
+              <li>
+                <div className="mypage_stategyList_strategyName">strategy1</div>
+                <div className="mypage_stategyList_strategyPercentage">NN%</div>
+                <div className="mypage_stategyList_toggleButton">토글</div>
+              </li>
+              <li>
+                <div className="mypage_stategyList_strategyName">strategy1</div>
+                <div className="mypage_stategyList_strategyPercentage">NN%</div>
+                <div className="mypage_stategyList_toggleButton">토글</div>
+              </li>
+              <li>
+                <div className="mypage_stategyList_strategyName">strategy1</div>
+                <div className="mypage_stategyList_strategyPercentage">NN%</div>
+                <div className="mypage_stategyList_toggleButton">토글</div>
+              </li>
+              <li>
+                <div className="mypage_stategyList_strategyName">strategy1</div>
+                <div className="mypage_stategyList_strategyPercentage">NN%</div>
+                <div className="mypage_stategyList_toggleButton">토글</div>
+              </li>
+              <li>
+                <div className="mypage_stategyList_strategyName">strategy1</div>
+                <div className="mypage_stategyList_strategyPercentage">NN%</div>
+                <div className="mypage_stategyList_toggleButton">토글</div>
+              </li>
+              <li>
+                <div className="mypage_stategyList_strategyName">strategy1</div>
+                <div className="mypage_stategyList_strategyPercentage">NN%</div>
+                <div className="mypage_stategyList_toggleButton">토글</div>
+              </li>
             </ol>
           </section>
           <section className="mypage_strategyDetail">

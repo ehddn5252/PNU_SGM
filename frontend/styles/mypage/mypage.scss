@@ -9,6 +9,7 @@
     // background: blue;
     width: 25%;
     height: 100%;
+    font-size: 1em;
 
     ul {
       list-style: none;
@@ -31,31 +32,70 @@
           text-align: center;
         }
       }
+      li:hover {
+        background: rgba(22, 22, 34, 0.4);
+        cursor: pointer;
+      }
     }
   }
   .mypage_strategyList {
     // background: red;
     width: 25%;
+    background: rgba(74, 71, 121, 0.4);
     height: 100%;
 
     div {
       width: calc(100% - 4vw);
       height: 4vh;
-      background: rgba(74, 71, 121, 0.4);
       padding: 2vw;
       font-size: 0.8em;
     }
     ol {
       list-style: none;
       height: auto;
-      background: rgba(74, 71, 121, 0.4);
       padding: 0;
       margin: 0;
 
       li {
-        height: 7vh;
-        width: calc(100% - 4vw);
-        padding: 0 2vw 0 2vw;
+        height: 5vh;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        // background: red;
+
+        div {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+        }
+
+        .mypage_stategyList_strategyName {
+          padding: 0 0 0 1vw;
+          // background: pink;
+          text-align: left;
+          height: 100%;
+          width: 60%;
+          font-size: 1em;
+        }
+        .mypage_stategyList_strategyPercentage {
+          padding: 0;
+          // background: purple;
+          width: 20%;
+          height: 100%;
+          text-align: right;
+        }
+        .mypage_stategyList_toggleButton {
+          padding: 0;
+          // background: palegoldenrod;
+          width: 20%;
+          height: 100%;
+          text-align: right;
+          padding: 0 1vw 0 0;
+        }
+      }
+      li:hover {
+        background: rgba(22, 22, 34, 0.4);
+        cursor: pointer;
       }
     }
   }
