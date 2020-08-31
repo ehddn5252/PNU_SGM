@@ -3,21 +3,9 @@ import pymongo
 import json
 
 #from test_backtesting_class_collection import Init_data, User_input_data, Stock_trading_indicator, Result
-
-# 규칙
-# 1. 맨 처음 받고 변하지 않는 변수는 모두 대문자로
-# 2. 받는 변수를 한 class로, 보내는 변수를 한 class로 만든다.
-# 3. 변수는 사용하는 곳 근처에서 선언하기
-
 # Function1 : rebalancing_date_data
 # 함수 설명 : 리벨런싱하는 주기별 날짜 데이터 가공 및 반환
-# Parameter : 
-# 1) user_input : User_input_data Class 객체
-# return : 
-# 1) rebalancing_date_list -> 주기별 날짜 데이터
-#  ex) 시작날이 20150101 종료일이 20160701이고 rebalancing이 분기별이면 [2014_12, 2015_03, 2015_06, 2015_09, 2015_12, 2016_03, 2016_06] 반환
 # clear
-
 def rebalancing_date_data(f,user_input):
     start_data_year = user_input.DATE_START//10000
     start_data_month = user_input.DATE_START%10000
@@ -32,18 +20,18 @@ def rebalancing_date_data(f,user_input):
         start_data_month="09"
     start_data_int=int(str(start_data_year)+start_data_month)
     start_data=str(start_data_year)+"_"+start_data_month
-    rebalancing_date_list=[]
     f.rebalancing_date_list.append(start_data)
     YEAR_LIST= [20100000,20110000,20120000,20130000,20140000,20150000,20160000,20170000,20180000,20190000,20200000]
     MONTH_LIST=[301,601,901,1201]
     # 분기별 데이터 가공
     temp=""
+    temp2= 0
     print(user_input.DATE_START)
     print(user_input.DATE_END)
     if user_input.REBALANCING=="0":
         for i in YEAR_LIST:
             for j in MONTH_LIST:
-                if user_input.DATE_START<=i+j and i+j<user_input.DATE_END:
+                if user_input.DATE_START<=i+j and i+j<=user_input.DATE_END:
                     if j!=1201:
                         temp=str(i//10000)+"_"+"0"+str(j//100)
                         f.rebalancing_date_list.append(temp)
@@ -55,42 +43,22 @@ def rebalancing_date_data(f,user_input):
         for i in YEAR_LIST:
             if user_input.DATE_START//10000<=i//10000 and i//10000<user_input.DATE_END//10000:
                 temp = str(i//10000)+"_"+start_data_month
+                temp2 = i+int(start_data_month)*100
                 f.rebalancing_date_list.append(temp)
+    f.rebalancing_date_list.append(temp) 
+    f.rebalancing_date_list.append(temp) 
+    f.rebalancing_date_list.append(temp) 
+    f.rebalancing_date_list.append(temp) 
+    f.rebalancing_date_list.append(temp) 
+    
     print(f.rebalancing_date_list)
-
 
 # Function2 : search_rebalanced_enterprise
 # explain : 리벨런싱할때 바꿔주는 기업 코드를 리턴하는 함수 
-# Parameter :
-# 1) db : db (import from pymongo)
-# 2) f : Init_data Class`s object
-# 3) user_input : User_input_data Class`s object
-# 4) count : revalancing count
-# return : 
-# 1) enterprise_list : enterprise list 
-# clear
-'''
-def search_rebalanced_enterprise(db,f,user_input,count):
-    start_data=""
-    enterprise_list=[]
-    print("count : "+ str(count))
-    print("f.rebalancing_date_list : "+f.rebalancing_date_list[count])
-    start_data=f.rebalancing_date_list[count]
-    for i,indicator in enumerate(user_input.INDICATOR_LIST):
-        user_input.INDICATOR_LIST[i]=user_input.INDICATOR_LIST[i]+"."+start_data
-    print('MongoDB Connected.')
-    # 이 부분은 지표를 3개 받게 했는데, find내부의 doc을 변수 dic으로 저장하려 했으나 쿼리문이 포함되서 dic형식으로 저장할 수가 없었다. 그래서 다른 방법 찾아야함.
-    for doc in db.stockparam.find({ "$and":[{user_input.INDICATOR_LIST[0] : { "$gte" : int(user_input.INDICATOR_MIN_LIST[0] ), "$lte": int(user_input.INDICATOR_MAX_LIST[0])}},{ user_input.INDICATOR_LIST[1] : { "$gte" : int(user_input.INDICATOR_MIN_LIST[1] ), "$lte": int(user_input.INDICATOR_MAX_LIST[1])}},{user_input.INDICATOR_LIST[2] : { "$gte" : int(user_input.INDICATOR_MIN_LIST[2] ), "$lte": int(user_input.INDICATOR_MAX_LIST[2])}}]},{"_id":False,"code":True}).sort([("Market_cap",-1)]).limit(20):
-        enterprise_list.append(doc["code"])
-    for i,indicator in enumerate(user_input.INDICATOR_LIST):
-        user_input.INDICATOR_LIST[i]=user_input.INDICATOR_LIST[i][:-8]
-    return enterprise_list
-'''
-
-def search_rebalanced_enterprise(db,f,user_input,j):
+def search_rebalanced_enterprise(db,f,user_input,r,j):
     start_data=""
     f.enterprise_list=[]
-    print("f.rebalancing_date_list : "+f.rebalancing_date_list[j])
+    print("f.rebalancing_date_list : "+f.rebalancing_date_list[j])              # 여기에서 문제가 발생
     start_data=f.rebalancing_date_list[j]
     for i,indicator in enumerate(user_input.INDICATOR_LIST):
         user_input.INDICATOR_LIST[i]=user_input.INDICATOR_LIST[i]+"."+start_data
@@ -105,97 +73,76 @@ def search_rebalanced_enterprise(db,f,user_input,j):
             mk_find_dic +="] }"
     json_find_dic=json.loads(mk_find_dic)
     #print(json_find_dic)
-
-    for doc in db.stock_parameters.find(json_find_dic,{"_id":False,"code":True}).sort([("Market_cap",-1)]).limit(20):
+    r.Reavalanced_code_name_dic[str(r.Reavalanced_code_name_dic_index)]=[]
+    for doc in db.stock_parameters.find(json_find_dic,{"_id":False,"code":True}).sort([("Market_cap",-1)]).limit(user_input.THE_NUMBER_OF_MAXIMUM_EVENT):
         f.enterprise_list.append(doc["code"])
+        r.Reavalanced_code_name_dic[str(r.Reavalanced_code_name_dic_index)].append(doc["code"])
 
+    r.Reavalanced_code_name_dic_index+=1    
     for i,indicator in enumerate(user_input.INDICATOR_LIST):
         user_input.INDICATOR_LIST[i]=user_input.INDICATOR_LIST[i][:-8]
     #print(f.enterprise_list)
 # Function3 : make_code_date_clasifyed_list
 # explain : 리벨런싱한 기업의 데이터를 리벨런싱 주기별로 바꿔줄 때 사용
-# Parameter : 
-# 1) db : db (import from pymongo)
-# 2) f : Init_data Class`s object
-# 3) user_input : User_input_data Class`s object
-# return : 
-# 1) code_date_clasifyed_list_init.copy() : classifyed data
-# 2) count : revalancing count
-def make_code_date_clasifyed_list(db,f,user_input):
+# 여기서 문제점은 분기별이 함수가 실행되는데, 리벨런싱 할때마다 전체 데이터를 저장하는 것이다. 그래서 이를
+# 리벨런싱 분기만큼의 데이터만 저장하게 해야한다. 나중에 갈아엎자
+# 또 리벨런싱지표와 date범위를 알았으면 맨 처음에 리벨런싱을 미리 다 해놓고, 기업을 뽑아놓은 다음 그 기업의 데이터를 미리 받아온다.
+def make_code_date_clasifyed_list(db,f,user_input,r):
+    
     date_change=user_input.DATE_START
     REBALANCING_YEAR_GAP=10000
     REBALANCING_QUARTER_GAP=300
     times=0
-    for k in range(user_input.THE_NUMBER_OF_MAXIMUM_EVENT):
+    f.code_date_clasifyed_list=[]
+    for k in range(0,user_input.THE_NUMBER_OF_MAXIMUM_EVENT+1):
+        f.code_date_clasifyed_list.append([])
+    for k in range(0,user_input.THE_NUMBER_OF_MAXIMUM_EVENT):
         code1= f.enterprise_list[k]
         date_change=user_input.DATE_START
-        for i in range(len(f.rebalancing_date_list)+10):      # 이건 문제가 아님
-            f.code_date_clasifyed_list_init[k].append([])
+        for i in range(len(f.rebalancing_date_list)+1):      # 이건 문제가 아님
+            f.code_date_clasifyed_list[k].append([])
         times=0
+        f.test+=1
+        log1=0
         for i in db.stock_priceInfo.find({"code":code1}):
             for j in i['data']:
+                # 범위별로 저장하기 위한 코드
                 if j['Date']>=user_input.DATE_START and j['Date']<=user_input.DATE_END:
+                    if f.test==1:
+                        #print("asset log1 : "+str(log1))
+                        log1+=1
+                        r.Assets_by_date_list.append({"Date":j["Date"],"Asset":0})
                     #분기별 리벨런싱
                     if user_input.REBALANCING=="0" and (j['Date']-date_change>=REBALANCING_QUARTER_GAP):      # 여기가 문제
+                        date_change = j['Date'] 
                         times=times+1
-                        if j['Date']-date_change>=2000:
-                            date_change = date_change -1229 + 10000
-                        else:   
-                            date_change = date_change + REBALANCING_QUARTER_GAP
                     #연도별 리벨런싱
                     elif user_input.REBALANCING=="1"and (j['Date']-date_change>=REBALANCING_YEAR_GAP):
-                        date_change= date_change + REBALANCING_YEAR_GAP
+                        date_change=j['Date'] # date_change + REBALANCING_YEAR_GAP
                         times=times+1
-                    #no REBALANCING
-                    # elif user_input.REBALANCING=="2":
-                    f.code_date_clasifyed_list_init[k][times].append(j)
-    '''
-    print('times'+ str(times))
-    for m in range(user_input.THE_NUMBER_OF_MAXIMUM_EVENT):
-        for n in range(times):
-            print("k : "+str(m))
-            print("j : "+str(n))
-            print(f.code_date_clasifyed_list[m][n])
-            print("##########################################################")
-            print("##########################################################")
-            print("##########################################################")
-    '''
-    print('times'+ str(times))
-    '''if times !=0:
-        times-=1'''
+                    f.code_date_clasifyed_list[k][times].append({"Date" : j["Date"], "Close":j["Close"]})
+    
+        
+    times+=1
     return times
 
 # Function4 : init_list_condiiton(f,user_input)
 # Explain : make list space
-# parameter : 
-# 1) f : Init_data Class`s object
-# 2) user_input : User_input_data Class`s object
 def init_list_condiiton(f,user_input):
-    for i in range(0,user_input.THE_NUMBER_OF_MAXIMUM_EVENT):
+    for i in range(0,user_input.THE_NUMBER_OF_MAXIMUM_EVENT+1):
         f.is_buy.append(0)
         f.buy_count.append(0)
-    # 최대 기업 수만큼 리스트 공간 만들어줌
-    for k in range(0,user_input.THE_NUMBER_OF_MAXIMUM_EVENT+1):
-        f.code_date_clasifyed_list.append([])
 
 # Function5 : set_buy_sell_price(user_input,close_price,j)
 # Expalin : set buy sell price
-# Parameter :
-# 1) user_input : User_input_data Class`s object
-# 2) close_price : stock`s close price
-# 3) k : enterprise index
-# 4) j : revalancing index
-# return 
-# 1) buying_price : close price * buying condition
-# 2) sales_profit_price : close price * sales profit condition
-# 3) sales_loss_price : close_price * sales loss condition
-
 def set_buy_sell_price(f,user_input,trade,k,j):
     close_price=0
-    for data in f.code_date_clasifyed_list_init[k][j]:
+    for data in f.code_date_clasifyed_list[k][j]:
         close_price=float(data['Close'])              #이거 데이터 순서가 날짜 정방향 순서대로인지 확인해야함
+        '''
         print("========================revalancing========================")
         print("change : close price :"+ str(data['Close']) )
+        '''
         break
     trade.buying_price = close_price * user_input.BUYING_CONDITION    # 매수 조건
     trade.sales_profit_price = close_price * float(user_input.sales_profit)  # 익절가격
@@ -206,19 +153,9 @@ def set_buy_sell_price(f,user_input,trade,k,j):
     print("sales_profit_price : "+ str(trade.sales_profit_price))
     print("sales_loss_price : "+ str(trade.sales_loss_price))
     '''
+
 # Function6 : buying_stock(f,user_input,data,partition_invertment_principal,k,sales_profit_price,sales_loss_price)
 # Explain : selling stock
-# Parameter : 
-# 1) f : Init_data Class`s object
-# 2) user_input : User_input_data Class`s object
-# 3) partition_invertment_principal : partition investment principal
-# 4) k : enterprise index
-# 5) sales_profit_price : sales profit price
-# 6) sales_loss_price : sales loss price
-# return :
-# 1) sales_profit_price : adjusted sales loss price
-# 2) sales_loss_price : adjusted sales_loss_price
-# 3) partition_invertment_principal :  partition_invertment_principal after buy
 def buying_stock(f,user_input,trade,data,k):
     f.buy_count[k] = f.partition_invertment_principal[k] // trade.buying_price
     f.partition_invertment_principal[k]-= f.buy_count[k]*trade.buying_price
@@ -231,21 +168,12 @@ def buying_stock(f,user_input,trade,data,k):
     '''
     trade.sales_profit_price = trade.buying_price * float(user_input.sales_profit)  # 익절가격
     trade.sales_loss_price = trade.buying_price * float(user_input.sales_loss)      # 손절 가격
+    f.check_win_lose_price=trade.buying_price
     f.is_buy[k]=1
 
 # Function7 : selling_stock(f,user_input,data,partition_invertment_principal,k,buying_price)
 # Explain : selling stock
-# Parameter : 
-# 1) f : Init_data Class`s object
-# 2) user_input : User_input_data Class`s object
-# 3) data : db.price_info`s stock data dictionary
-# 4) partition_invertment_principal : partition invertment principal
-# 5) k : enterprise index
-# 6) buying_price : buying price
-# return :
-# 1) partition_invertment_principal : partition invertment principal after sell
-# 2) buying_price : adjusted buying price
-def selling_stock_profit(f,user_input,trade,data,k):
+def selling_stock_profit(f,user_input,trade,r,data,k):
     f.partition_invertment_principal[k] += f.buy_count[k]*trade.sales_profit_price
     '''
     print("========================sell=============================")
@@ -257,8 +185,9 @@ def selling_stock_profit(f,user_input,trade,data,k):
     trade.buying_price = trade.sales_profit_price * user_input.BUYING_CONDITION    # 매수 조건
     f.buy_count[k]=0
     f.is_buy[k]=0
+    r.win+=1
 
-def selling_stock_loss(f,user_input,trade,data,k):
+def selling_stock_loss(f,user_input,trade,r,data,k):
     f.partition_invertment_principal[k] += f.buy_count[k]*trade.sales_loss_price
     '''
     print("========================sell=============================")
@@ -270,15 +199,18 @@ def selling_stock_loss(f,user_input,trade,data,k):
     trade.buying_price = trade.sales_loss_price* user_input.BUYING_CONDITION    # 매수 조건
     f.buy_count[k]=0
     f.is_buy[k]=0
+    r.lose+=1
 
 # Function8 : lastday_sell_all(f,user_input,)
-# Parameter :
-# 1) f : Init_data Class`s object
-# 2) user_input : User_input_data Class`s object
-# 4) k : enterprise index
-# 5) data : db.price_info`s data
-def lastday_sell_all(f,user_input,k,data):
+def lastday_sell_all(f,user_input,r,k,data):
     f.partition_invertment_principal[k] += f.buy_count[k]*data["Close"]
+    
+    if f.is_buy[k]==1:
+        if f.check_win_lose_price > data["Close"]:
+            r.lose+=1
+        else:
+            r.win+=1
+    
     '''
     print("====================last day, sell all============================")
     print("1. date : "+str(data['Date']))
@@ -300,13 +232,29 @@ def set_result(f,user_input,r):
     r.currentAsset = int(f.investment_principal)
     r.cagr= int(r.profit_all/user_input.INVESTMENT_PRINCIPAL_COPY * 100)
 
+def current_investment_asset(f,data,k):
+    return int(data["Close"] * f.buy_count[k] + f.partition_invertment_principal[k])
+
+# 로그 만드는 함수 
+# clear
+def loging(f,user_input,r,l,data,k):
+    if l.saved_k!=k:
+        l.date_index=l.routine
+        l.saved_k=k
+    #print("l.date_index : "+str(l.date_index))
+    r.Assets_by_date_list[l.date_index]["Asset"]+=current_investment_asset(f,data,k)
+    l.date_index+=1
+    if k==(user_input.THE_NUMBER_OF_MAXIMUM_EVENT-1):
+        l.routine= l.routine + 1
+
 # function10 :    
-def backtesting(initData,userInputData,stockTradingIndicator,result):
+def backtesting(initData,userInputData,stockTradingIndicator,result,log):
     # 초기 CLASS 세팅
     f = initData
     user_input=userInputData
     user_input.strategy1()
     trade = stockTradingIndicator
+    l=log
     r = result
     
     '''
@@ -321,50 +269,53 @@ def backtesting(initData,userInputData,stockTradingIndicator,result):
     # init setting
     rebalancing_date_data(f,user_input)
     init_list_condiiton(f,user_input)
-    f.code_date_clasifyed_list_init=f.code_date_clasifyed_list[:]
-    search_rebalanced_enterprise(db,f,user_input,0)
-    count=make_code_date_clasifyed_list(db,f,user_input)
+    search_rebalanced_enterprise(db,f,user_input,r,0)
+    count=make_code_date_clasifyed_list(db,f,user_input,r)
+    r.Assets_by_date_list.append({"Date":0,"Asset":0})
     count2=count
-    # count2 = 리벨런싱한 총 횟수
-    print("count "+str(count2))
-    for j in range(count2):
+    # count2 = 리벨런싱한 총 횟수 + 1
+    for j in range(0,count2):
         if j!=0:
-            search_rebalanced_enterprise(db,f,user_input,j)
-            count=make_code_date_clasifyed_list(db,f,user_input)
-
+            search_rebalanced_enterprise(db,f,user_input,r,j)
+            count=make_code_date_clasifyed_list(db,f,user_input,r)
         f.partition_invertment_principal=[]
         for ttt in range(user_input.THE_NUMBER_OF_MAXIMUM_EVENT):
             f.partition_invertment_principal.append(f.investment_principal//user_input.THE_NUMBER_OF_MAXIMUM_EVENT)
         f.investment_principal-=f.partition_invertment_principal[0]*user_input.THE_NUMBER_OF_MAXIMUM_EVENT
-
-        for k in range(user_input.THE_NUMBER_OF_MAXIMUM_EVENT):
+        for k in range(0,user_input.THE_NUMBER_OF_MAXIMUM_EVENT):
             print("change enterprise")
             print("code : "+ f.enterprise_list[k])
             set_buy_sell_price(f,user_input,trade,k,j)
-            for i,data in enumerate(f.code_date_clasifyed_list_init[k][j]):
+            for i, data in enumerate(f.code_date_clasifyed_list[k][j]):
                 # 매수 조건
                 if f.is_buy[k]==0:
-                    #print("print : "+ str(buying_price))
                     if data["Close"]<=int(trade.buying_price):
                         buying_stock(f,user_input,trade,data,k)
                 # 매도 조건
                 elif f.is_buy[k]==1:
                     # 익절
                     if data["Close"]>=trade.sales_profit_price:
-                        selling_stock_profit(f,user_input,trade,data,k)
+                        selling_stock_profit(f,user_input,trade,r,data,k)
                     # 손절
-                    elif  data["Close"] <= trade.sales_loss_price:
-                        selling_stock_loss(f,user_input,trade,data,k)
-
+                    elif data["Close"] <= trade.sales_loss_price:
+                        selling_stock_loss(f,user_input,trade,r,data,k)
+                loging(f,user_input,r,l,data,k)
             # 리벨런싱 전에는 가지고 있는 주식을 다 판다.
-                if i==len(f.code_date_clasifyed_list_init[k][j])-1:
-                    lastday_sell_all(f,user_input,k,data)
-            #lastday_sell_all(f,user_input,f.partition_invertment_principal,k,data)
-
+                if i==len(f.code_date_clasifyed_list[k][j])-1:
+                    lastday_sell_all(f,user_input,r,k,data)
+    print("##########################################")
+    # r.Assets_by_date_list에 dic list형식으로 날짜와 날짜별 자산이 저장됨
+    for j in r.Assets_by_date_list:
+        print(j)
+    #print(r.Assets_by_date_list)
     set_result(f,user_input,r)
+    print("r.Reavalanced_code_name_dic : ")
+    print(r.Reavalanced_code_name_dic)
     print("profit_all   : " + str(r.profit_all))
     print("cagr         : " + str(r.cagr)+" %")
     print("currentAsset : " +str(r.currentAsset))
+    print("win : "+str(r.win))
+    print("lose : "+str(r.lose))
     
 
 

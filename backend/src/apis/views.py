@@ -7,7 +7,7 @@ from .serializers import userSerializer,strategySerializer,resultSerializer
 from .models import User, Strategy, Result
 
 from .rebalancing import test_backtesting
-from .rebalancing.test_backtesting_class_collection import Init_data,User_input_data,Stock_trading_indicator,Result
+from .rebalancing.test_backtesting_class_collection import Init_data,User_input_data,Stock_trading_indicator,Result,Loging
 
 # ================= user crud ======================= 
 # ===================================================
@@ -39,8 +39,10 @@ def apiOverview(request):
 	userInputData = User_input_data()
 	stockTradingIndicator = Stock_trading_indicator()
 	result = Result("dongwoo")
+	log = Loging()
 
-	test_backtesting.backtesting(initData,userInputData,stockTradingIndicator,result)
+
+	test_backtesting.backtesting(initData,userInputData,stockTradingIndicator,result,log)
 	return Response(api_urls)
 
 
