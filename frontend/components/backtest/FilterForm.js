@@ -3,11 +3,9 @@ import { useSelector, useDispatch } from "react-redux"
 
 import FilterLayout from "../layout/FilterLayout"
 import useInput from "../LoginForm"
-import addParametersAction from "../../reducers/group"
 
 const FilterForm = () => {
   const group = useSelector(state => state.group)
-  console.log(group)
 
   const dispatch = useDispatch()
   const { strategyName, onChangeStrategyName } = useInput("")
@@ -88,71 +86,124 @@ const FilterForm = () => {
   // const [strategyOpenStatus, onChangeStrategyOpenStatus] = useInput("")
   // const strategyOpenStatus = useState("")
 
-  const onSubmitForm = useCallback(e => {
-    e.preventDefault()
-    console.log(group)
-    dispatch(
-      addParametersAction({
-        strategyName,
-        strategyNumber,
-        writerName,
-        strategyDescription,
+  const onSubmitForm = useCallback(
+    e => {
+      e.preventDefault()
+      const target = e.target
 
-        investment,
-        investment_Start,
-        investment_End,
-        maxStockNumber,
-        userMarketCap,
+      dispatch({
+        type: "ADD_PARAMETERS",
+        data: {
+          // strategyName,
+          // strategyNumber,
+          // writerName,
+          // strategyDescription,
 
-        userROE,
-        userROA,
-        userSalesPerProfit,
-        userSalesPerMargin,
-        userSalesIncrese,
-        userMarginIncrease,
-        userProfitIncrease,
-        userDebtRatio,
-        userCurrentRatio,
-        userOperatingActivityCashFlow,
-        userInvestmentActivityCashFlow,
-        userFinancialActivityCashFlow,
+          investment: target.investment.value,
+          investment_Start: target.investment_Start.value,
+          investment_End: target.investment_End.value,
+          maxStockNumber: target.maxStockNumber.value,
+          userMarketCap: target.userMarketCap.value,
 
-        userEPS_Start,
-        userEPS_End,
-        userBPS_Start,
-        userBPS_End,
-        userCFPS_Start,
-        userCFPS_End,
-        userSPS_Start,
-        userSPS_End,
-        userDPS_Start,
-        userDPS_End,
+          userROE: target.userROE.value,
+          userROA: target.userROA.value,
+          userSalesPerProfit: target.userSalesPerProfit.value,
+          userSalesPerMargin: target.userSalesPerMargin.value,
+          userSalesIncrese: target.userSalesIncrese.value,
+          userMarginIncrease: target.userMarginIncrease.value,
+          userProfitIncrease: target.userProfitIncrease.value,
+          userDebtRatio: target.userDebtRatio.value,
+          userCurrentRatio: target.userCurrentRatio.value,
+          userOperatingActivityCashFlow:
+            target.userOperatingActivityCashFlow.value,
+          userInvestmentActivityCashFlow:
+            target.userInvestmentActivityCashFlow.value,
+          userFinancialActivityCashFlow:
+            target.userFinancialActivityCashFlow.value,
 
-        userPER_Start,
-        userPER_End,
-        userPBR_Start,
-        userPBR_End,
-        userPCR_Start,
-        userPCR_End,
-        userPSR_Start,
-        userPSR_End,
-        userMarketDiviend_Start,
-        userMarketDiviend_End,
+          userEPS_Start: target.userEPS_Start.value,
+          userEPS_End: target.userEPS_End.value,
+          userBPS_Start: target.userBPS_Start.value,
+          userBPS_End: target.userBPS_End.value,
+          userCFPS_Start: target.userCFPS_Start.value,
+          userCFPS_End: target.userCFPS_End.value,
+          userSPS_Start: target.userSPS_Start.value,
+          userSPS_End: target.userSPS_End.value,
+          userDPS_Start: target.userDPS_Start.value,
+          userDPS_End: target.userDPS_End.value,
 
-        purchaseCondition,
-        targetPrice,
-        sellPrice,
-        revalancingPeriod
+          userPER_Start: target.userPER_Start.value,
+          userPER_End: target.userPER_End.value,
+          userPBR_Start: target.userPBR_Start.value,
+          userPBR_End: target.userPBR_End.value,
+          userPCR_Start: target.userPCR_Start.value,
+          userPCR_End: target.userPCR_End.value,
+          userPSR_Start: target.userPSR_Start.value,
+          userPSR_End: target.userPSR_End.value,
+          userMarketDiviend_Start: target.userMarketDiviend_Start.value,
+          userMarketDiviend_End: target.userMarketDiviend_End.value,
 
-        // strategyOpenStatus
+          purchaseCondition: target.purchaseCondition.value,
+          targetPrice: target.targetPrice.value,
+          sellPrice: target.sellPrice.value,
+          revalancingPeriod: target.revalancingPeriod.value
+
+          // strategyOpenStatus
+        }
       })
-    )
-    console.log(group)
-  }, [])
+    },
+    [
+      investment,
+      investment_Start,
+      investment_End,
+      maxStockNumber,
+      userMarketCap,
+
+      userROE,
+      userROA,
+      userSalesPerProfit,
+      userSalesPerMargin,
+      userSalesIncrese,
+      userMarginIncrease,
+      userProfitIncrease,
+      userDebtRatio,
+      userCurrentRatio,
+      userOperatingActivityCashFlow,
+      userInvestmentActivityCashFlow,
+      userFinancialActivityCashFlow,
+
+      userEPS_Start,
+      userEPS_End,
+      userBPS_Start,
+      userBPS_End,
+      userCFPS_Start,
+      userCFPS_End,
+      userSPS_Start,
+      userSPS_End,
+      userDPS_Start,
+      userDPS_End,
+
+      userPER_Start,
+      userPER_End,
+      userPBR_Start,
+      userPBR_End,
+      userPCR_Start,
+      userPCR_End,
+      userPSR_Start,
+      userPSR_End,
+      userMarketDiviend_Start,
+      userMarketDiviend_End,
+
+      purchaseCondition,
+      targetPrice,
+      sellPrice,
+      revalancingPeriod
+    ]
+  )
 
   return (
     <>
-      <form onSubmit={onSubmitForm} className="filter-form">
+      <form name="filterForm" onSubmit={onSubmitForm} className="filter-form">
         <FilterLayout title="기본설정(필수)">
           <div>
             투자금
@@ -288,8 +339,8 @@ const FilterForm = () => {
                 <input type="checkbox" /> 부재비율
                 <input
                   type="number"
-                  name="userMarginIncrease"
-                  value={userMarginIncrease}
+                  name="userDebtRatio"
+                  value={userDebtRatio}
                   onChange={onChangeUserDebtRatio}
                 />
                 이하
