@@ -84,7 +84,7 @@ class Strategy(models.Model):
     strategyOpenedInPlatform = models.BooleanField(verbose_name="플랫폼에 오픈하기", blank=True)
     
     def __str__(self):
-        return self.stret_name
+        return self.strategyName
 
     class Meta:
         db_table = "Strategy"

@@ -85,7 +85,8 @@ class Stock_trading_indicator:
 # 객체 
 class Result:
    def __init__(self,writer_name):
-        self.writer_name=""         #유저 이름
+        self.strategy_number=0      # 전략 번호
+        self.writer_name=""         # 유저 이름
         # result value
         self.profit_all =0          # 최종 수익
         self.currentAsset =0        # 현재 자산

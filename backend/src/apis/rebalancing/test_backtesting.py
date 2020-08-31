@@ -231,6 +231,9 @@ def set_result(f,user_input,r):
     r.profit_all = int(f.investment_principal - user_input.INVESTMENT_PRINCIPAL_COPY)
     r.currentAsset = int(f.investment_principal)
     r.cagr= int(r.profit_all/user_input.INVESTMENT_PRINCIPAL_COPY * 100)
+    r.strategy_number = 1
+    r.writer_name = "2"
+
 
 def current_investment_asset(f,data,k):
     return int(data["Close"] * f.buy_count[k] + f.partition_invertment_principal[k])
@@ -271,7 +274,7 @@ def backtesting(initData,userInputData,stockTradingIndicator,result,log):
     init_list_condiiton(f,user_input)
     search_rebalanced_enterprise(db,f,user_input,r,0)
     count=make_code_date_clasifyed_list(db,f,user_input,r)
-    r.Assets_by_date_list.append({"Date":0,"Asset":0})
+    #r.Assets_by_date_list.append({"Date":0,"Asset":0})
     count2=count
     # count2 = 리벨런싱한 총 횟수 + 1
     for j in range(0,count2):
@@ -304,19 +307,26 @@ def backtesting(initData,userInputData,stockTradingIndicator,result,log):
                 if i==len(f.code_date_clasifyed_list[k][j])-1:
                     lastday_sell_all(f,user_input,r,k,data)
     print("##########################################")
-    # r.Assets_by_date_list에 dic list형식으로 날짜와 날짜별 자산이 저장됨
-    for j in r.Assets_by_date_list:
-        print(j)
+
     #print(r.Assets_by_date_list)
     set_result(f,user_input,r)
-    print("r.Reavalanced_code_name_dic : ")
-    print(r.Reavalanced_code_name_dic)
-    print("profit_all   : " + str(r.profit_all))
-    print("cagr         : " + str(r.cagr)+" %")
-    print("currentAsset : " +str(r.currentAsset))
-    print("win : "+str(r.win))
-    print("lose : "+str(r.lose))
+
+
+    #print("profit_all   : " + str(r.profit_all))
+    #print("currentAsset : " +str(r.currentAsset))
+    #print("cagr         : " + str(r.cagr)+" %")
+
+    #print("##########################################")
+    # r.Assets_by_date_list에 dic list형식으로 날짜와 날짜별 자산이 저장됨
+    #print("r.Reavalanced_code_name_dic : ")
+    #print(r.Reavalanced_code_name_dic)
+
+    #print("##########################################")
+    #print(str(r.Assets_by_date_list))
+    #print("win : "+str(r.win))
+    #print("lose : "+str(r.lose))
     
+    return r
 
 
 def testfunc():

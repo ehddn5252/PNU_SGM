@@ -1,3 +1,7 @@
+# pymongo 사용 모듈 추출
+import pymongo
+import json
+
 from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, action
@@ -8,6 +12,40 @@ from .models import User, Strategy, Result
 
 from .rebalancing import test_backtesting
 from .rebalancing.test_backtesting_class_collection import Init_data,User_input_data,Stock_trading_indicator,Result,Loging
+
+# =============== for mongodb save ==================
+# =================================================== 
+
+def printResultObj(resultObj):
+	print("strategy_result")
+	print("writer_name")
+	
+	print(resultObj.profit_all)
+	print(resultObj.currentAsset)
+	print(resultObj.cagr)
+	
+	print(resultObj.Reavalanced_code_name_dic)
+	
+	#print(resultObj.Assets_by_date_list)
+	print(resultObj.win)
+	print(resultObj.lose)
+
+def saveResultInMongo(resultObj):
+	client = pymongo.MongoClient("mongodb+srv://admin:admin@cluster0.kjrlb.mongodb.net/<pnu_sgm_platformdata>?retryWrites=true&w=majority")    # 파이몽고 사용해서
+	db = client.pnu_sgm_platformdata
+	returnObj = {
+		'strategy_result_id' : resultObj.strategy_number,
+		'writer_name_id' : resultObj.writer_name,
+		'profit_all' : resultObj.profit_all,
+		'currentAsset' : resultObj.currentAsset,
+		'Final_yield' : resultObj.cagr,
+		'selected_companys' : str(resultObj.Reavalanced_code_name_dic),
+		'Current_assets_by_date' : str(resultObj.Assets_by_date_list),
+		'Winning_rate' : resultObj.win,
+		'Reavalanced_code_name_list' : str(resultObj.Reavalanced_code_name_dic)
+	}
+	db.Results.insert_one(returnObj)
+
 
 # ================= user crud ======================= 
 # ===================================================
@@ -42,7 +80,10 @@ def apiOverview(request):
 	log = Loging()
 
 
-	test_backtesting.backtesting(initData,userInputData,stockTradingIndicator,result,log)
+	resultObj = test_backtesting.backtesting(initData,userInputData,stockTradingIndicator,result,log)
+	printResultObj(resultObj)
+	saveResultInMongo(resultObj)
+
 	return Response(api_urls)
 
 
