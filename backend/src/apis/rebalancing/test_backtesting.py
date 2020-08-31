@@ -231,8 +231,6 @@ def set_result(f,user_input,r):
     r.profit_all = int(f.investment_principal - user_input.INVESTMENT_PRINCIPAL_COPY)
     r.currentAsset = int(f.investment_principal)
     r.cagr= int(r.profit_all/user_input.INVESTMENT_PRINCIPAL_COPY * 100)
-    r.strategy_number = 1
-    r.writer_name = "2"
 
 
 def current_investment_asset(f,data,k):
@@ -286,8 +284,8 @@ def backtesting(initData,userInputData,stockTradingIndicator,result,log):
             f.partition_invertment_principal.append(f.investment_principal//user_input.THE_NUMBER_OF_MAXIMUM_EVENT)
         f.investment_principal-=f.partition_invertment_principal[0]*user_input.THE_NUMBER_OF_MAXIMUM_EVENT
         for k in range(0,user_input.THE_NUMBER_OF_MAXIMUM_EVENT):
-            print("change enterprise")
-            print("code : "+ f.enterprise_list[k])
+            #print("change enterprise")
+            #print("code : "+ f.enterprise_list[k])
             set_buy_sell_price(f,user_input,trade,k,j)
             for i, data in enumerate(f.code_date_clasifyed_list[k][j]):
                 # 매수 조건
@@ -306,7 +304,7 @@ def backtesting(initData,userInputData,stockTradingIndicator,result,log):
             # 리벨런싱 전에는 가지고 있는 주식을 다 판다.
                 if i==len(f.code_date_clasifyed_list[k][j])-1:
                     lastday_sell_all(f,user_input,r,k,data)
-    print("##########################################")
+    #print("##########################################")
 
     #print(r.Assets_by_date_list)
     set_result(f,user_input,r)
@@ -327,7 +325,3 @@ def backtesting(initData,userInputData,stockTradingIndicator,result,log):
     #print("lose : "+str(r.lose))
     
     return r
-
-
-def testfunc():
-    print("hi")

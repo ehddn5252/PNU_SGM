@@ -18,7 +18,6 @@ class User(models.Model):
 
 
 class Strategy(models.Model):
-
     objects = models.Manager()
     # 기본 항목
     strategyName = models.CharField(max_length=128, verbose_name="전략명")
@@ -47,7 +46,6 @@ class Strategy(models.Model):
     userOperatingActivityCashFlow = models.BooleanField(verbose_name="영업활동현금흐름", blank=True)
     userInvestmentActivityCashFlow = models.BooleanField(verbose_name="투자활동현금흐름", blank=True)
     userFinancialActivityCashFlow = models.BooleanField(verbose_name="재무활동현금흐름", blank=True)
-
     # Tab3 벨류 지표
 
     # 주당 가치평가 지표

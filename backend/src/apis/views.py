@@ -17,18 +17,16 @@ from .rebalancing.test_backtesting_class_collection import Init_data,User_input_
 # =================================================== 
 
 def printResultObj(resultObj):
-	print("strategy_result")
-	print("writer_name")
-	
+	print("strategy_result_test")
+	print("writer_name_test")
 	print(resultObj.profit_all)
 	print(resultObj.currentAsset)
 	print(resultObj.cagr)
-	
 	print(resultObj.Reavalanced_code_name_dic)
-	
-	#print(resultObj.Assets_by_date_list)
+	print(resultObj.Assets_by_date_list)
 	print(resultObj.win)
 	print(resultObj.lose)
+
 
 def saveResultInMongo(resultObj):
 	client = pymongo.MongoClient("mongodb+srv://admin:admin@cluster0.kjrlb.mongodb.net/<pnu_sgm_platformdata>?retryWrites=true&w=majority")    # 파이몽고 사용해서
@@ -72,18 +70,6 @@ def apiOverview(request):
 		'(Do not use)Result Update':'/result-update/<str:pk>/',
 		'(Do not use)Result Delete':'/result-delete/<str:pk>/',
 		}
-	test_backtesting.testfunc()
-	initData = Init_data()
-	userInputData = User_input_data()
-	stockTradingIndicator = Stock_trading_indicator()
-	result = Result("dongwoo")
-	log = Loging()
-
-
-	resultObj = test_backtesting.backtesting(initData,userInputData,stockTradingIndicator,result,log)
-	printResultObj(resultObj)
-	saveResultInMongo(resultObj)
-
 	return Response(api_urls)
 
 
@@ -148,10 +134,21 @@ def strategyDetail(request, pk):
 
 @api_view(['POST'])
 def strategyCreate(request):
+    # strategy data from request
 	serializer = strategySerializer(data=request.data)
-	
+	# save it in mongodb
 	if serializer.is_valid():
 		serializer.save()
+	# make backtesting object
+	initData = Init_data()
+	userInputData = User_input_data()
+	stockTradingIndicator = Stock_trading_indicator()
+	result = Result(str(request.data["writerName"]))
+	result.strategy_number = request.data["strategyNumber"]
+	log = Loging()
+	resultObj = test_backtesting.backtesting(initData,userInputData,stockTradingIndicator,result,log)
+	# save backtested result in mongodb 
+	saveResultInMongo(resultObj)
 
 	return Response(serializer.data)
 
