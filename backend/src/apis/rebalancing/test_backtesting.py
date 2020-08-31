@@ -365,6 +365,7 @@ def backtesting(initData,userInputData,stockTradingIndicator,result):
     print("profit_all   : " + str(r.profit_all))
     print("cagr         : " + str(r.cagr)+" %")
     print("currentAsset : " +str(r.currentAsset))
+    
 
 
 def testfunc():
