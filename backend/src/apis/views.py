@@ -140,8 +140,10 @@ def strategyCreate(request):
 	if serializer.is_valid():
 		serializer.save()
 	# make backtesting object
+
 	initData = Init_data()
 	userInputData = User_input_data()
+	
 	stockTradingIndicator = Stock_trading_indicator()
 	result = Result(str(request.data["writerName"]))
 	result.strategy_number = request.data["strategyNumber"]

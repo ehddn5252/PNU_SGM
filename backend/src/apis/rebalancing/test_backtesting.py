@@ -81,7 +81,8 @@ def search_rebalanced_enterprise(db,f,user_input,r,j):
     r.Reavalanced_code_name_dic_index+=1    
     for i,indicator in enumerate(user_input.INDICATOR_LIST):
         user_input.INDICATOR_LIST[i]=user_input.INDICATOR_LIST[i][:-8]
-    #print(f.enterprise_list)
+    print(f.enterprise_list)
+
 # Function3 : make_code_date_clasifyed_list
 # explain : 리벨런싱한 기업의 데이터를 리벨런싱 주기별로 바꿔줄 때 사용
 # 여기서 문제점은 분기별이 함수가 실행되는데, 리벨런싱 할때마다 전체 데이터를 저장하는 것이다. 그래서 이를
@@ -253,16 +254,16 @@ def backtesting(initData,userInputData,stockTradingIndicator,result,log):
     # 초기 CLASS 세팅
     f = initData
     user_input=userInputData
-    user_input.strategy1()
+
+    user_input.set_basic_data()
+    user_input.set_indicator_data()
+    user_input.set_backtesting_data()
+    # user_input.strategy1()
+
     trade = stockTradingIndicator
     l=log
     r = result
     
-    '''
-    user_input.set_indicator_data()
-    user_input.set_basic_data()
-    user_input.set_backtesting_data()
-    '''
     count=0                          # 리벨런싱 횟수 정해주는 변수
     f.investment_principal = user_input.INVESTMENT_PRINCIPAL_COPY
     client = pymongo.MongoClient("mongodb+srv://admin:admin@cluster0.kjrlb.mongodb.net/<pnu_sgm_stockdata>?retryWrites=true&w=majority")    # 파이몽고 사용해서
