@@ -61,64 +61,57 @@ export const addParametersAction = data => {
 }
 
 export default (state = initialState, action) => {
-  console.log(action)
-  switch (action.type) {
+  const { type, data } = action
+
+  switch (type) {
     case ADD_PARAMETERS: {
       return {
         ...state,
-        strategyName: action.data.strategyName,
-        strategyNumber: action.data.strategyNumber,
-        writerName: action.data.writerName,
-        strategyDescription: action.data.strategyDescription,
+        investment: data.investment,
+        investment_Start: data.investment_Start,
+        investment_End: data.investment_End,
+        maxStockNumber: data.maxStockNumber,
+        userMarketCap: data.userMarketCap,
 
-        investment: action.data.investment,
-        investment_Start: action.data.investment_Start,
-        investment_End: action.data.investment_End,
-        maxStockNumber: action.data.maxStockNumber,
-        userMarketCap: action.data.userMarketCap,
+        userROE: data.userROE,
+        userROA: data.userROA,
+        userSalesPerProfit: data.userSalesPerProfit,
+        userSalesPerMargin: data.userSalesPerMargin,
+        userSalesIncrese: data.userSalesIncrese,
+        userMarginIncrease: data.userMarginIncrease,
+        userProfitIncrease: data.userProfitIncrease,
+        userDebtRatio: data.userDebtRatio,
+        userCurrentRatio: data.userCurrentRatio,
+        userOperatingActivityCashFlow: data.userOperatingActivityCashFlow,
+        userInvestmentActivityCashFlow: data.userInvestmentActivityCashFlow,
+        userFinancialActivityCashFlow: data.userFinancialActivityCashFlow,
 
-        userROE: action.data.userROE,
-        userROA: action.data.userROA,
-        userSalesPerProfit: action.data.userSalesPerProfit,
-        userSalesPerMargin: action.data.userSalesPerMargin,
-        userSalesIncrese: action.data.userSalesIncrese,
-        userMarginIncrease: action.data.userMarginIncrease,
-        userProfitIncrease: action.data.userProfitIncrease,
-        userDebtRatio: action.data.userDebtRatio,
-        userCurrentRatio: action.data.userCurrentRatio,
-        userOperatingActivityCashFlow:
-          action.data.userOperatingActivityCashFlow,
-        userInvestmentActivityCashFlow:
-          action.data.userInvestmentActivityCashFlow,
-        userFinancialActivityCashFlow:
-          action.data.userFinancialActivityCashFlow,
+        userEPS_Start: data.userEPS_Start,
+        userEPS_End: data.userEPS_End,
+        userBPS_Start: data.userBPS_Start,
+        userBPS_End: data.userBPS_End,
+        userCFPS_Start: data.userCFPS_Start,
+        userCFPS_End: data.userCFPS_End,
+        userSPS_Start: data.userSPS_Start,
+        userSPS_End: data.userSPS_End,
+        userDPS_Start: data.userDPS_Start,
+        userDPS_End: data.userDPS_End,
 
-        userEPS_Start: action.data.userEPS_Start,
-        userEPS_End: action.data.userEPS_End,
-        userBPS_Start: action.data.userBPS_Start,
-        userBPS_End: action.data.userBPS_End,
-        userCFPS_Start: action.data.userCFPS_Start,
-        userCFPS_End: action.data.userCFPS_End,
-        userSPS_Start: action.data.userSPS_Start,
-        userSPS_End: action.data.userSPS_End,
-        userDPS_Start: action.data.userDPS_Start,
-        userDPS_End: action.data.userDPS_End,
+        userPER_Start: data.userPER_Start,
+        userPER_End: data.userPER_End,
+        userPBR_Start: data.userPBR_Start,
+        userPBR_End: data.userPBR_End,
+        userPCR_Start: data.userPCR_Start,
+        userPCR_End: data.userPCR_End,
+        userPSR_Start: data.userPSR_Start,
+        userPSR_End: data.userPSR_End,
+        userMarketDiviend_Start: data.userMarketDiviend_Start,
+        userMarketDiviend_End: data.userMarketDiviend_End,
 
-        userPER_Start: action.data.userPER_Start,
-        userPER_End: action.data.userPER_End,
-        userPBR_Start: action.data.userPBR_Start,
-        userPBR_End: action.data.userPBR_End,
-        userPCR_Start: action.data.userPCR_Start,
-        userPCR_End: action.data.userPCR_End,
-        userPSR_Start: action.data.userPSR_Start,
-        userPSR_End: action.data.userPSR_End,
-        userMarketDiviend_Start: action.data.userMarketDiviend_Start,
-        userMarketDiviend_End: action.data.userMarketDiviend_End,
-
-        purchaseCondition: action.data.purchaseCondition,
-        targetPrice: action.data.targetPrice,
-        sellPrice: action.data.sellPrice,
-        revalancingPeriod: action.data.revalancingPeriod
+        purchaseCondition: data.purchaseCondition,
+        targetPrice: data.targetPrice,
+        sellPrice: data.sellPrice,
+        revalancingPeriod: data.revalancingPeriod
       }
     }
 

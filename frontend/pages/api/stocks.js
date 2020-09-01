@@ -3,7 +3,6 @@
 export default (req, res) => {
   res.statusCode = 200
   res.json({
-    win: 70,
-    lose: 30
+    stocks: ["첫번째종목", "두번째", "세번째", "네번째", "다섯번째"]
   })
 }

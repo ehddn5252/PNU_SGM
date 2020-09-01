@@ -7,7 +7,6 @@ import MonthGraph from "../components/backtest/MonthGraph"
 import OddsGraph from "../components/backtest/OddsGraph"
 import MainGraph from "../components/backtest/MainGraph"
 
-
 import { useSelector, useDispatch } from "react-redux"
 import addParameters from "../reducers/group"
 import addParametersAction from "../reducers/group"
@@ -16,10 +15,9 @@ import { useInput } from "../components/LoginForm"
 import axios from "axios"
 
 // 동주 수정사항
-import {lineYield_getData} from '../actions/lineYieldActions';
-import {winRate_getData} from '../actions/winRateActions';
-import { Line, Doughnut } from 'react-chartjs-2'
-
+import { lineYield_getData } from "../actions/lineYieldActions"
+import { winRate_getData } from "../actions/winRateActions"
+import { Line, Doughnut } from "react-chartjs-2"
 
 const BackTest = () => {
   //   const response = axios.get("api/hello").then(function (response) {
@@ -44,17 +42,16 @@ const BackTest = () => {
   //     setStretName('');
   // });
 
-  
   // 동주 수정사항
   // 메인 그래프
-  // 임의로 정한 버튼 나중에 backtest 버튼으로 대체해야함. 
-  const dispatch = useDispatch();
-  const Mainstate = useSelector(state => state.lineYieldReducer);
-  const winRatestate = useSelector(state=>state.winRateReducer);
+  // 임의로 정한 버튼 나중에 backtest 버튼으로 대체해야함.
+  const dispatch = useDispatch()
+  const Mainstate = useSelector(state => state.lineYieldReducer)
+  const winRatestate = useSelector(state => state.winRateReducer)
 
-  const fetchData = () =>{
-    dispatch(lineYield_getData());
-    dispatch(winRate_getData());
+  const fetchData = () => {
+    dispatch(lineYield_getData())
+    dispatch(winRate_getData())
   }
 
   return (
@@ -83,19 +80,15 @@ const BackTest = () => {
                 </article>
                 <article className="subGraph2">
                   {/* 임의의 승률 보여줌*/}
-                    <Doughnut 
-                      data = {winRatestate.data}
-                    />
+                  <Doughnut data={winRatestate.data} />
                 </article>
               </div>
             </div>
             <div className="result-secondLine">
               <article className="mainGraph">
-              {/* 잘 안보이지만 버튼 누르면 몽고디비에서 코스피 데이터 가져와서 그려줌 */}
-              <button onClick={() => fetchData()}>kospiYield</button>
-                <Line 
-                  data = {Mainstate.data}
-                />
+                {/* 잘 안보이지만 버튼 누르면 몽고디비에서 코스피 데이터 가져와서 그려줌 */}
+                <button onClick={() => fetchData()}>kospiYield</button>
+                <Line data={Mainstate.data} />
               </article>
             </div>
           </section>
