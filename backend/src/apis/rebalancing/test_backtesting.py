@@ -255,9 +255,9 @@ def backtesting(initData,userInputData,stockTradingIndicator,result,log):
     f = initData
     user_input=userInputData
 
-    user_input.set_basic_data()
-    user_input.set_indicator_data()
-    user_input.set_backtesting_data()
+    # user_input.set_basic_data()
+    # user_input.set_indicator_data()
+    # user_input.set_backtesting_data()
     # user_input.strategy1()
 
     trade = stockTradingIndicator

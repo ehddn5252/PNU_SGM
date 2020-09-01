@@ -35,7 +35,7 @@ class User_input_data:
         print("세팅을 하려면 indicator_list 3개, indicator_min 3개, indicator_max 3개, 투자원금, ")
 
 #   조건1. 지표조건
-    def set_indicator_data(self,INDICATOR_NUM=3,INDICATOR_LIST=["PER","PBR","ROE"],INDICATOR_MIN_LIST = ['1','1','10'],INDICATOR_MAX_LIST = ["10","10","10"]):
+    def set_indicator_data(self,INDICATOR_NUM=3,INDICATOR_LIST=["PER","PBR","ROE"],INDICATOR_MIN_LIST = ['1','1','10'],INDICATOR_MAX_LIST = ["10","10","100"]):
         self.INDICATOR_NUM = INDICATOR_NUM
         self.INDICATOR_LIST=[]
         for indicator in INDICATOR_LIST:
@@ -48,7 +48,7 @@ class User_input_data:
             self.INDICATOR_MAX_LIST.append(max_value)
 #   조건2. 초기 자본, 백테스팅 시작, 백테스팅 끝 날짜
     def set_basic_data(self,investment_principal=1000000,DATE_START=20140101,DATE_END=20180701,THE_NUMBER_OF_MAXIMUM_EVENT=4):
-        self.INVESTMENT_PRINCIPAL_COPY = self.investment_principal= investment_principal           # 초기 자본
+        self.INVESTMENT_PRINCIPAL_COPY = investment_principal           # 초기 자본
         self.DATE_START = DATE_START                    # 백테스팅 시작 날짜
         self.DATE_END = DATE_END                      # 백테스팅 종료 날짜
         self.THE_NUMBER_OF_MAXIMUM_EVENT = THE_NUMBER_OF_MAXIMUM_EVENT          # 최대 선택 종목 수
@@ -84,9 +84,9 @@ class Stock_trading_indicator:
 # 결과 class
 # 객체 
 class Result:
-   def __init__(self,writer_name):
+   def __init__(self,writer_id_input=0):
         self.strategy_number=0      # 전략 번호
-        self.writer_name=""         # 유저 이름
+        self.writer_id=writer_id_input # 유저 이름
         # result value
         self.profit_all =0          # 최종 수익
         self.currentAsset =0        # 현재 자산

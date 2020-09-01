@@ -33,7 +33,7 @@ def saveResultInMongo(resultObj):
 	db = client.pnu_sgm_platformdata
 	returnObj = {
 		'strategy_result_id' : resultObj.strategy_number,
-		'writer_name_id' : resultObj.writer_name,
+		'writer_name_id' : resultObj.writer_id,
 		'profit_all' : resultObj.profit_all,
 		'currentAsset' : resultObj.currentAsset,
 		'Final_yield' : resultObj.cagr,
@@ -139,15 +139,21 @@ def strategyCreate(request):
 	# save it in mongodb
 	if serializer.is_valid():
 		serializer.save()
-	# make backtesting object
+		print("strategy is saved!")
 
+	# make backtesting object
 	initData = Init_data()
 	userInputData = User_input_data()
+
+	userInputData.set_basic_data(request.data["investment"],request.data["investment_Start"],request.data["investment_End"])
+	userInputData.set_indicator_data()
+	userInputData.set_backtesting_data(request.data["purchaseCondition"]/10,request.data["targetPrice"]/10,request.data["sellPrice"]/10)
 	
 	stockTradingIndicator = Stock_trading_indicator()
-	result = Result(str(request.data["writerName"]))
+	result = Result(request.data["writerName"])
 	result.strategy_number = request.data["strategyNumber"]
 	log = Loging()
+
 	resultObj = test_backtesting.backtesting(initData,userInputData,stockTradingIndicator,result,log)
 	# save backtested result in mongodb 
 	saveResultInMongo(resultObj)
