@@ -15,11 +15,11 @@ body {
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
-.filterContainer::-webkit-scrollbar-thumb {
+.filterForm-filter-section::-webkit-scrollbar-thumb {
   border-radius: 3px;
   background-color: gray;
 }
-.filterContainer::-webkit-scrollbar-button {
+.filterForm-filter-section::-webkit-scrollbar-button {
   width: 0;
   height: 0;
 }
