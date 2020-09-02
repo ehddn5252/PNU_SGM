@@ -9,7 +9,6 @@ import "../styles/index/index.scss"
 
 // backtest style
 import "../styles/backtest/backtest.scss"
-import "../styles/backtest/filter.scss"
 import "../styles/backtest/filterform.scss"
 
 // mypage style
@@ -25,7 +24,7 @@ import { Provider } from "react-redux"
 import withRedux from "next-redux-wrapper"
 import { createStore, compose, applyMiddleware } from "redux"
 // 동주 수정사항 redux-thunk 추가
-import ReduxThunk from 'redux-thunk';
+import ReduxThunk from "redux-thunk"
 
 const Songgolmae = ({ Component, store }) => {
   return (
@@ -43,7 +42,7 @@ const Songgolmae = ({ Component, store }) => {
 
 export default withRedux((initialState, options) => {
   // const middleware = [ReduxThunk];
-  const middleware = [ReduxThunk];
+  const middleware = [ReduxThunk]
   const enhance = compose(
     applyMiddleware(...middleware),
     !options.isServer &&

@@ -69,8 +69,10 @@
   }
 
   .main-container {
+    height: calc(100% - 60px);
     display: flex;
     flex-direction: row;
+    // background: gray;
 
     aside {
       width: 50px;

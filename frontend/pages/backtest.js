@@ -60,12 +60,12 @@ const BackTest = () => {
         <div className="backtest-contents">
           {/* 결과section */}
           <section className="result-section">
+            <div className="result-firstLine-title">BACKTESTING RESULT</div>
+            <div className="result-firstLine-detail">
+              맥스턴은 코스피 주식을 기반으로, 거래 수수료0, 거래세0, 거래
+              가격은 당일 종가를 기본으로 설정하고 있습니다.
+            </div>
             <div className="result-firstLine">
-              <div className="result-firstLine-title">BACKTESTING RESULT</div>
-              <div className="result-firstLine-detail">
-                맥스턴은 코스피 주식을 기반으로, 거래 수수료0, 거래세0, 거래
-                가격은 당일 종가를 기본으로 설정하고 있습니다.
-              </div>
               <div className="result-box">
                 <div className="item-result-box">
                   <article className="items">
@@ -75,10 +75,7 @@ const BackTest = () => {
                     <Result />
                   </article>
                 </div>
-                <article className="subGraph1">
-                  <MonthGraph />
-                </article>
-                <article className="subGraph2">
+                <article className="subGraph">
                   {/* 임의의 승률 보여줌*/}
                   <Doughnut data={winRatestate.data} />
                 </article>
@@ -102,19 +99,6 @@ const BackTest = () => {
             </div>
             <article className="filterContainer">
               <FilterForm />
-              {/* <input 
-                                type="text"
-                                name="stret_name"
-                                value={stretName}
-                                onChange={onChangeStretName}
-                            />
-                            <input 
-                                type="number"
-                                name="stret_num"
-                                value={stretNum}
-                                onChange={onChangeStretNum}
-                            />
-                            <button type="submit">제출</button> */}
             </article>
           </section>
         </div>
