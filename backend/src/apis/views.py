@@ -1,6 +1,6 @@
 # pymongo 사용 모듈 추출
 import pymongo
-import json
+import json 
 
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -12,6 +12,18 @@ from .models import User, Strategy, Result
 
 from .rebalancing import test_backtesting
 from .rebalancing.test_backtesting_class_collection import Init_data,User_input_data,Stock_trading_indicator,Result,Loging
+
+from bson import ObjectId
+from bson import json_util, ObjectId
+
+# =============== for dict to json ==================
+# =================================================== 
+
+class JSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        return json.JSONEncoder.default(self, o)
 
 # =============== for mongodb save ==================
 # =================================================== 
@@ -38,11 +50,12 @@ def saveResultInMongo(resultObj):
 		'currentAsset' : resultObj.currentAsset,
 		'Final_yield' : resultObj.cagr,
 		'selected_companys' : str(resultObj.Reavalanced_code_name_dic),
-		'Current_assets_by_date' : str(resultObj.Assets_by_date_list),
+		'Current_assets_by_date' : resultObj.Assets_by_date_list,
 		'Winning_rate' : resultObj.win,
 		'Reavalanced_code_name_list' : str(resultObj.Reavalanced_code_name_dic)
 	}
 	db.Results.insert_one(returnObj)
+	return returnObj
 
 
 # ================= user crud ======================= 
@@ -156,9 +169,18 @@ def strategyCreate(request):
 
 	resultObj = test_backtesting.backtesting(initData,userInputData,stockTradingIndicator,result,log)
 	# save backtested result in mongodb 
-	saveResultInMongo(resultObj)
+	objTypeResult = saveResultInMongo(resultObj)
+	print("dictionarytype return value")
+	#print(objTypeResult)
+	print(type(objTypeResult))
+	# objTypeResult = JSONEncoder().encode(objTypeResult)
+	objTypeResult = json.loads(json_util.dumps(objTypeResult))
+	print("jsontype return value")
+	#print(objTypeResult)
+	print(type(objTypeResult))
 
-	return Response(serializer.data)
+	# return Response(serializer.data)
+	return JsonResponse(objTypeResult, safe=False)
 
 
 @api_view(['POST'])

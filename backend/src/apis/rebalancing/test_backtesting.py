@@ -51,14 +51,14 @@ def rebalancing_date_data(f,user_input):
     f.rebalancing_date_list.append(temp) 
     f.rebalancing_date_list.append(temp) 
     
-    print(f.rebalancing_date_list)
+    #print(f.rebalancing_date_list)
 
 # Function2 : search_rebalanced_enterprise
 # explain : 리벨런싱할때 바꿔주는 기업 코드를 리턴하는 함수 
 def search_rebalanced_enterprise(db,f,user_input,r,j):
     start_data=""
     f.enterprise_list=[]
-    print("f.rebalancing_date_list : "+f.rebalancing_date_list[j])              # 여기에서 문제가 발생
+    #print("f.rebalancing_date_list : "+f.rebalancing_date_list[j])              # 여기에서 문제가 발생
     start_data=f.rebalancing_date_list[j]
     for i,indicator in enumerate(user_input.INDICATOR_LIST):
         user_input.INDICATOR_LIST[i]=user_input.INDICATOR_LIST[i]+"."+start_data
@@ -81,7 +81,7 @@ def search_rebalanced_enterprise(db,f,user_input,r,j):
     r.Reavalanced_code_name_dic_index+=1    
     for i,indicator in enumerate(user_input.INDICATOR_LIST):
         user_input.INDICATOR_LIST[i]=user_input.INDICATOR_LIST[i][:-8]
-    print(f.enterprise_list)
+    #print(f.enterprise_list)
 
 # Function3 : make_code_date_clasifyed_list
 # explain : 리벨런싱한 기업의 데이터를 리벨런싱 주기별로 바꿔줄 때 사용
