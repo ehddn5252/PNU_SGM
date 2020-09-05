@@ -85,20 +85,20 @@ class Stock_trading_indicator:
 # 객체 
 class Result:
    def __init__(self,writer_id_input=0):
-        self.strategy_number=0      # 전략 번호
-        self.writer_id=writer_id_input # 유저 이름
+        self.strategy_number=0                  # 전략 번호
+        self.writer_id=writer_id_input          # 유저 이름
         # result value
-        self.profit_all =0          # 최종 수익
-        self.currentAsset =0        # 현재 자산
-        self.cagr = 0               # 누적 수익률
-        self.quarter_cagr =[]       # 분기별 수익률
+        self.profit_all =0                      # 최종 수익
+        self.currentAsset =0                    # 현재 자산
+        self.cagr = 0                           # 누적 수익률
+        self.quarter_cagr =[]                   # 분기별 수익률
         # 승률
-        self.win = 0
-        self.lose = 0
+        self.win = 0                            # 이익을 보고 판 횟수
+        self.lose = 0                           # 손해를 보고 판 횟수
         # 일별 자산
-        self.Assets_by_date_list=[]
-        self.Reavalanced_code_name_dic={}
-        self.Reavalanced_code_name_dic_index=0
+        self.Assets_by_date_list=[]             # 일별 자산 list
+        self.Reavalanced_code_name_dic={}       # 리벨런싱한 기업을 저장하는 dictionary
+        self.Reavalanced_code_name_dic_index=0  # 리벨런싱한 기업 index
 # 로깅 만드는 함수
 # 객체 l
 class Loging:

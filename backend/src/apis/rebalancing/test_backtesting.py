@@ -250,46 +250,14 @@ def loging(f,user_input,r,l,data,k):
         l.routine= l.routine + 1
 
 
-# 2020/09/03 21:30분 함수 추가
-def get_indicator_from_json(user_input):
-    user_input.INDICATOR_LIST= []                                          # 지표 리스트
-    user_input.INDICATOR_MIN_LIST = []                                    # 지표별 최솟값
-    user_input.INDICATOR_MAX_LIST = []                                    # 지표별 최댓값
-    
-    # test_indicator.json 내용 : 
-    # { "userPER_start":0, "userPER_end":1, "userPBR_start":1, "userPBR_end":3, "userROE_start":0, "userROE_end":0 }
-    # json 파일을 가져오는 것이라 그냥 json파일 여는 것으로 해놨는데 이 부분을 받아오는 형식대로 고쳐야할듯?
-    with open('../json_file/test_indicator.json') as json_file:
-        dic = json.load(json_file)
-
-    # 여기부분은 list에 추가하는 부분 근데, 가져올 때 여기서는 null값을 -999 와 같은 토큰으로 넣게 했습니다
-    for key,value in dic.items():
-        if key[-3:] =="art" and value!=-999:
-            user_input.INDICATOR_MIN_LIST.append(value)
-            user_input.INDICATOR.append(key[4:-6])
-        elif key[-3:] =="end" and value!=-999:
-            user_input.INDICATOR_MAX_LIST.append(value)
-    print(user_input.INDICATOR)
-    print(user_input.INDICATOR_MIN_LIST)
-    print(user_input.INDICATOR_MAX_LIST)
-
-
-
 # function10 :    
 def backtesting(initData,userInputData,stockTradingIndicator,result,log):
     # 초기 CLASS 세팅
     f = initData
     user_input=userInputData
-
-    # user_input.set_basic_data()
-    # user_input.set_indicator_data()
-    # user_input.set_backtesting_data()
-    # user_input.strategy1()
-    get_indicator_from_json(user_input)
     trade = stockTradingIndicator
     l=log
     r = result
-    
     count=0                          # 리벨런싱 횟수 정해주는 변수
     f.investment_principal = user_input.INVESTMENT_PRINCIPAL_COPY
     client = pymongo.MongoClient("mongodb+srv://admin:admin@cluster0.kjrlb.mongodb.net/<pnu_sgm_stockdata>?retryWrites=true&w=majority")    # 파이몽고 사용해서
