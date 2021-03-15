@@ -1,5 +1,5 @@
 
-# PROJECT SONGGOLMAE ( 임시 readme-file )
+# PROJECT SONGGOLMAE
 > 부산대학교 제3회 창의융합SW해커톤
 
 [![NPM Version][npm-image]][npm-url]
